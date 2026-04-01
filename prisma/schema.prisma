@@ -1,0 +1,401 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS - Removed for SQLite compatibility, using String fields instead
+// ============================================================================
+
+// Note: Enum values are now plain strings with default values
+// Role: "ADMIN", "CLIENT"
+// SessionStatus: "ACTIVE", "COMPLETED", "TERMINATED"
+// ToolRiskLevel: "LOW", "MEDIUM", "HIGH"
+// TaskStatus: "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
+
+// ============================================================================
+// CORE ENTITIES - Users and Sessions
+// ============================================================================
+
+// SQLite compatible - using String instead of enum
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("CLIENT")  // ADMIN, CLIENT
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+
+  // Relations
+  sessions      Session[]
+  auditLogs     AuditLog[]
+  agentConfigs  AgentConfig[]
+
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+  @@map("users")
+}
+
+model Session {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  agentId       String
+  agentName     String
+  
+  token         String?   // JWT refresh token
+  expiresAt     DateTime? // Token expiration
+  
+  startTime     DateTime  @default(now())
+  endTime       DateTime?
+  status        String    @default("ACTIVE")  // ACTIVE, COMPLETED, TERMINATED
+  
+  contextJson   String?
+  metadata      String?
+  
+  ipAddress     String?
+  userAgent     String?
+
+  // Relations
+  messages      Message[]
+  tasks         Task[]
+
+  @@index([userId])
+  @@index([agentId])
+  @@index([status])
+  @@index([startTime])
+  @@map("sessions")
+}
+
+model Message {
+  id            String    @id @default(uuid())
+  sessionId     String
+  session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  role          String    // "user", "assistant", "system"
+  content       String
+  
+  metadata      String?
+  createdAt     DateTime  @default(now())
+
+  @@index([sessionId])
+  @@index([role])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+// ============================================================================
+// AGENT SYSTEM - Core Agent Configuration and Memory
+// ============================================================================
+
+model Agent {
+  id            String    @id @default(uuid())
+  agentId       String    @unique
+  name          String
+  description   String?
+  
+  enabled       Boolean   @default(true)
+  version       String    @default("1.0.0")
+  
+  personaJson   String    // Stored JSON for agent persona/behavior
+  
+  modelProvider String    @default("ollama")  // ollama, openai, gemini, etc
+  modelName     String    @default("mistral")
+  
+  temperature   Float     @default(0.7)
+  maxTokens     Int       @default(2048)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  configs       AgentConfig[]
+  tools         AgentTool[]
+  memory        AgentMemory[]
+
+  @@index([enabled])
+  @@index([modelProvider])
+  @@map("agents")
+}
+
+model AgentConfig {
+  id            String    @id @default(uuid())
+  agentId       String
+  agent         Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  configJson    String    // Custom configuration for this agent per user
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([agentId, userId])
+  @@index([userId])
+  @@map("agent_configs")
+}
+
+model AgentMemory {
+  id            String    @id @default(uuid())
+  agentId       String
+  agent         Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  
+  type          String    // "vector", "semantic", "conversation", "knowledge"
+  content       String
+  
+  embedding     String?   // Vector embedding (JSON array)
+  metadata      String?
+  
+  relevanceScore Float   @default(0)
+  
+  createdAt     DateTime  @default(now())
+  accessedAt    DateTime?
+
+  @@index([agentId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("agent_memory")
+}
+
+// ============================================================================
+// TOOLS AND GOVERNANCE
+// ============================================================================
+
+model Tool {
+  id            String    @id @default(uuid())
+  toolId        String    @unique
+  name          String
+  description   String?
+  
+  riskLevel     String    @default("LOW")  // LOW, MEDIUM, HIGH
+  requiresConfirmation Boolean @default(false)
+  
+  enabled       Boolean   @default(true)
+  schema        String    // JSON schema for tool parameters
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  agentTools    AgentTool[]
+  executions    ToolExecution[]
+  permissions   ToolPermission[]
+
+  @@index([enabled])
+  @@index([riskLevel])
+  @@map("tools")
+}
+
+model AgentTool {
+  id            String    @id @default(uuid())
+  agentId       String
+  agent         Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  
+  toolId        String
+  tool          Tool      @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  
+  enabled       Boolean   @default(true)
+  
+  createdAt     DateTime  @default(now())
+
+  @@unique([agentId, toolId])
+  @@index([agentId])
+  @@index([toolId])
+  @@map("agent_tools")
+}
+
+model ToolPermission {
+  id            String    @id @default(uuid())
+  toolId        String
+  tool          Tool      @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  
+  role          String    // ADMIN, CLIENT
+  allowed       Boolean   @default(true)
+  
+  rateLimit     Int?      // requests per minute
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([toolId, role])
+  @@map("tool_permissions")
+}
+
+model ToolExecution {
+  id            String    @id @default(uuid())
+  toolId        String
+  tool          Tool      @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  
+  userId        String?
+  input         String    // JSON input parameters
+  output        String?   // JSON output result
+  
+  status        String    @default("pending")  // pending, success, error
+  errorMessage  String?
+  
+  riskScore     Int       @default(0)
+  ethicsPassed  Boolean   @default(true)
+  
+  executionTime Int?      // milliseconds
+  createdAt     DateTime  @default(now())
+
+  @@index([toolId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("tool_executions")
+}
+
+// ============================================================================
+// GOVERNANCE AND AUDIT
+// ============================================================================
+
+model GovernancePolicy {
+  id            String    @id @default(uuid())
+  name          String    @unique
+  description   String?
+  
+  ruleJson      String    // JSON rules for validation
+  enabled       Boolean   @default(true)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([enabled])
+  @@map("governance_policies")
+}
+
+model AuditLog {
+  id            String    @id @default(uuid())
+  userId        String?
+  user          User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  action        String    // create, update, delete, execute, access
+  resource      String    // user, agent, tool, system, file
+  resourceId    String?
+  
+  riskScore     Int       @default(0)
+  ethicsPassed  Boolean   @default(true)
+  
+  details       String?
+  ipAddress     String?
+  userAgent     String?
+  
+  timestamp     DateTime  @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([resource])
+  @@index([timestamp])
+  @@map("audit_logs")
+}
+
+// ============================================================================
+// TASK AND PROJECT MANAGEMENT
+// ============================================================================
+
+model Task {
+  id            String    @id @default(uuid())
+  sessionId     String
+  session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  title         String
+  description   String?
+  
+  status        String    @default("PENDING")  // PENDING, IN_PROGRESS, COMPLETED, FAILED
+  priority      Int       @default(0)  // 0=low, 1=medium, 2=high
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  completedAt   DateTime?
+
+  @@index([sessionId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("tasks")
+}
+
+model Project {
+  id            String    @id @default(uuid())
+  name          String
+  slug          String    @unique
+  directoryPath String    @unique
+  
+  description   String?
+  techStack     String?   // JSON array of technologies
+  
+  status        String    @default("active")
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  documentations Documentation[]
+
+  @@index([status])
+  @@index([slug])
+  @@map("projects")
+}
+
+model Documentation {
+  id            String    @id @default(uuid())
+  projectId     String
+  project       Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  filePath      String
+  content       String?
+  
+  syncStatus    String    @default("pending")  // pending, synced, failed
+  lastSyncedAt  DateTime?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([projectId, filePath])
+  @@index([syncStatus])
+  @@map("documentation")
+}
+
+// ============================================================================
+// SYSTEM CONFIGURATION
+// ============================================================================
+
+model SystemConfig {
+  id            String    @id @default(uuid())
+  key           String    @unique
+  value         String
+  
+  encrypted     Boolean   @default(false)
+  description   String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([key])
+  @@map("system_config")
+}
+
+model SystemHealth {
+  id            String    @id @default(uuid())
+  
+  serviceStatus String    // JSON with service statuses
+  databaseSize  BigInt    @default(0)
+  memoryUsage   BigInt    @default(0)
+  
+  lastCheckAt   DateTime  @default(now())
+  uptime        BigInt    @default(0)  // seconds
+
+  @@map("system_health")
+}

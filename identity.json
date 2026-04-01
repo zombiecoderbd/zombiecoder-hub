@@ -1,0 +1,63 @@
+{
+  "system_identity": {
+    "name": "ZombieCoder",
+    "version": "2.0.0",
+    "tagline": "যেখানে কোড ও কথা বলে",
+    "tagline_en": "Where Code Speaks and Problems Are Shouldered",
+    "created_at": "2026-03-31T00:00:00Z",
+    "last_updated": "2026-04-01T00:00:00Z",
+    "branding": {
+      "owner": "Sahon Srabon",
+      "organization": "Developer Zone",
+      "address": "235 South Pirarbag, Amtala Bazar, Mirpur - 60 feet",
+      "location": "Dhaka, Bangladesh",
+      "country_code": "BD",
+      "contact": {
+        "phone": "+880 1323-626282",
+        "email": "info@zombiecoder.my.id",
+        "website": "https://zombiecoder.my.id/"
+      },
+      "social": {
+        "github": "https://github.com/sahonsrabon",
+        "linkedin": "https://linkedin.com/in/sahonsrabon"
+      }
+    },
+    "license": {
+      "type": "Proprietary",
+      "protocol": "Local Freedom Protocol",
+      "description": "Proprietary software with local-first operation rights"
+    },
+    "technical": {
+      "stack": {
+        "frontend": "Next.js 16 with React 19",
+        "backend": "Node.js with Express/Next.js API Routes",
+        "database": "SQLite with Prisma ORM",
+        "agents": "AI Model (Ollama/OpenAI/Gemini)",
+        "protocol": "Model Context Protocol (MCP)",
+        "transports": ["HTTP/HTTPS", "SSE", "WebSocket", "Stdio"]
+      },
+      "features": {
+        "modular_architecture": true,
+        "multi_provider_support": true,
+        "local_first_operation": true,
+        "governance_framework": true,
+        "rbac_enabled": true,
+        "mcp_compliant": true
+      }
+    },
+    "security": {
+      "identity_watermark": "X-Powered-By: ZombieCoder",
+      "signature_algorithm": "UUID-v4",
+      "metadata_protection": "Read-Only",
+      "tamper_detection": true
+    },
+    "governance": {
+      "ethics_framework": "Local-First, User-Safe, Transparent",
+      "agent_constraint": "No File Destruction, No Unauthorized Changes, No Deception",
+      "data_privacy": "On-Device Processing, No Cloud Dependencies",
+      "audit_logging": true
+    },
+    "mission": "Provide locally-operating, ethically-driven development assistance with complete transparency and genuine utility",
+    "vision": "Create an ecosystem of trustworthy, locally-powered tools that augment developer productivity while preserving privacy and control"
+  }
+}
