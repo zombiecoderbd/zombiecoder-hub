@@ -148,11 +148,11 @@ export function getEnvironmentConfig(): EnvironmentConfig {
 
     // AI Providers
     OLLAMA_URL: process.env.OLLAMA_URL || 'http://localhost:11434',
-    OLLAMA_MODEL: process.env.OLLAMA_MODEL || 'mistral',
+    OLLAMA_MODEL: process.env.OLLAMA_MODEL || 'smollm:latest',
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4-turbo',
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-    GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-pro',
+    GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-flash-latest',
 
     // MCP Configuration
     MCP_TRANSPORT: (process.env.MCP_TRANSPORT || 'stdio') as any,
@@ -236,7 +236,7 @@ export const ZOMBIECODER_CONSTANTS = {
   DEFAULT_TEMPERATURE: 0.7,
   DEFAULT_MAX_TOKENS: 2048,
   DEFAULT_PROVIDER: 'ollama',
-  DEFAULT_MODEL: 'mistral',
+  DEFAULT_MODEL: 'smollm:latest',
 }
 
 // ============================================================================

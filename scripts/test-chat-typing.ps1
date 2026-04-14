@@ -2,7 +2,7 @@ param(
   [string]$BaseUrl = "http://localhost:3000",
   [string]$Email = $env:MCP_EMAIL,
   [string]$Password = $env:MCP_PASSWORD,
-  [int]$TypingDelayMs = 12
+  [int]$TypingDelayMs = 1
 )
 
 function Write-Typing([string]$Text, [int]$DelayMs) {

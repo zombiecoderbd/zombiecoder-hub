@@ -26,8 +26,8 @@ export class OllamaProvider {
 
   constructor() {
     this.baseUrl = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-    this.model = process.env.OLLAMA_MODEL || 'mistral';
-    this.timeout = parseInt(process.env.OLLAMA_TIMEOUT_MS || '30000', 10);
+    this.model = process.env.OLLAMA_MODEL || 'smollm:latest';
+    this.timeout = parseInt(process.env.OLLAMA_TIMEOUT_MS || '60000', 10); // Increased from 30s to 60s
   }
 
   /**
@@ -140,6 +140,66 @@ export class OllamaProvider {
       return data.models?.map((m) => m.name) || [];
     } catch {
       return [];
+    }
+  }
+
+  /**
+   * Stream message from Ollama
+   */
+  async *streamChat(
+    messages: OllamaMessage[],
+    options?: { model?: string }
+  ): AsyncGenerator<string> {
+    try {
+      const model = options?.model || this.model;
+      const response = await fetch(`${this.baseUrl}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model,
+          messages,
+          stream: true,
+          options: {
+            temperature: 0.7,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Ollama stream error: ${response.statusText}`);
+      }
+
+      if (!response.body) {
+        throw new Error('Ollama stream response body is null');
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n');
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const data = JSON.parse(line) as OllamaResponse;
+            if (data.message?.content) {
+              yield data.message.content;
+            } else if (data.response) {
+              yield data.response;
+            }
+          } catch (e) {
+            console.warn('[Ollama] Failed to parse stream chunk:', e);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[v0] Ollama streaming error:', err);
+      throw err;
     }
   }
 

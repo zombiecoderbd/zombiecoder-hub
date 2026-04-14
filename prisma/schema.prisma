@@ -6,13 +6,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 // ============================================================================
-// ENUMS - Removed for SQLite compatibility, using String fields instead
-// ============================================================================
+// ENUMS - Using String fields instead of enums for flexibility
+// ===============================================
 
 // Note: Enum values are now plain strings with default values
 // Role: "ADMIN", "CLIENT"
@@ -55,15 +55,15 @@ model Session {
   agentId       String
   agentName     String
   
-  token         String?   // JWT refresh token
+  token         String?   @db.Text // JWT refresh token
   expiresAt     DateTime? // Token expiration
   
   startTime     DateTime  @default(now())
   endTime       DateTime?
   status        String    @default("ACTIVE")  // ACTIVE, COMPLETED, TERMINATED
   
-  contextJson   String?
-  metadata      String?
+  contextJson   String?   @db.Text
+  metadata      String?   @db.Text
   
   ipAddress     String?
   userAgent     String?
@@ -85,9 +85,9 @@ model Message {
   session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   
   role          String    // "user", "assistant", "system"
-  content       String
+  content       String    @db.Text  // Changed to Text to support long AI responses
   
-  metadata      String?
+  metadata      String?   @db.Text
   createdAt     DateTime  @default(now())
 
   @@index([sessionId])
@@ -109,10 +109,15 @@ model Agent {
   enabled       Boolean   @default(true)
   version       String    @default("1.0.0")
   
-  personaJson   String    // Stored JSON for agent persona/behavior
+  personaJson   String    @db.Text // Stored JSON for agent persona/behavior
   
   modelProvider String    @default("ollama")  // ollama, openai, gemini, etc
-  modelName     String    @default("mistral")
+  modelName     String    @default("smollm:latest")
+
+  providerId    Int?
+  provider      Provider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+  modelId       Int?
+  model         Model?    @relation(fields: [modelId], references: [id], onDelete: SetNull)
   
   temperature   Float     @default(0.7)
   maxTokens     Int       @default(2048)
@@ -138,7 +143,7 @@ model AgentConfig {
   userId        String
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  configJson    String    // Custom configuration for this agent per user
+  configJson    String    @db.Text // Custom configuration for this agent per user
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -153,10 +158,11 @@ model AgentMemory {
   agentId       String
   agent         Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
   
+  sessionId     String?   // Linked session for context retrieval
   type          String    // "vector", "semantic", "conversation", "knowledge"
-  content       String
+  content       String    @db.Text
   
-  embedding     String?   // Vector embedding (JSON array)
+  embedding     String?   @db.Text // Vector embedding (JSON array)
   metadata      String?
   
   relevanceScore Float   @default(0)
@@ -165,6 +171,7 @@ model AgentMemory {
   accessedAt    DateTime?
 
   @@index([agentId])
+  @@index([sessionId])
   @@index([type])
   @@index([createdAt])
   @@map("agent_memory")
@@ -184,7 +191,7 @@ model Tool {
   requiresConfirmation Boolean @default(false)
   
   enabled       Boolean   @default(true)
-  schema        String    // JSON schema for tool parameters
+  schema        String    @db.Text // JSON schema for tool parameters
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -267,7 +274,7 @@ model GovernancePolicy {
   name          String    @unique
   description   String?
   
-  ruleJson      String    // JSON rules for validation
+  ruleJson      String    @db.Text // JSON rules for validation
   enabled       Boolean   @default(true)
   
   createdAt     DateTime  @default(now())
@@ -312,7 +319,8 @@ model Task {
   session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   
   title         String
-  description   String?
+  description   String?   @db.Text
+  result        String?   @db.Text  // Agent response / task output
   
   status        String    @default("PENDING")  // PENDING, IN_PROGRESS, COMPLETED, FAILED
   priority      Int       @default(0)  // 0=low, 1=medium, 2=high
@@ -369,13 +377,106 @@ model Documentation {
 }
 
 // ============================================================================
+// AI PROVIDERS AND MODELS
+// ============================================================================
+
+model Provider {
+  id            Int       @id @default(autoincrement())
+  key           String    @unique
+  name          String
+  enabled       Boolean   @default(true)
+  lastSyncedAt  DateTime?
+
+  defaultModelId Int?
+  defaultModel   Model?   @relation("ProviderDefaultModel", fields: [defaultModelId], references: [id], onDelete: SetNull)
+
+  models        Model[]   @relation("ProviderModels")
+
+  agents        Agent[]
+  usage         ProviderUsage?
+  modelUsage    ModelUsage[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("providers")
+}
+
+model Model {
+  id            Int       @id @default(autoincrement())
+  providerId    Int
+  provider      Provider  @relation("ProviderModels", fields: [providerId], references: [id], onDelete: Cascade)
+
+  name          String
+
+  defaultForProviders Provider[] @relation("ProviderDefaultModel")
+
+  agents        Agent[]
+  usage         ModelUsage[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([providerId, name])
+  @@index([providerId])
+  @@map("models")
+}
+
+model ModelUsage {
+  id            Int       @id @default(autoincrement())
+  providerId    Int
+  provider      Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  modelId       Int
+  model         Model     @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  requestCount  Int       @default(0)
+  successCount  Int       @default(0)
+  errorCount    Int       @default(0)
+
+  avgLatencyMs  Int       @default(0)
+  lastLatencyMs Int       @default(0)
+  lastStatus    String    @default("unknown")
+  lastError     String?   @db.Text
+  lastRequestAt DateTime?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([providerId, modelId])
+  @@index([providerId])
+  @@index([modelId])
+  @@map("model_usage")
+}
+
+model ProviderUsage {
+  id            Int       @id @default(autoincrement())
+  providerId    Int       @unique
+  provider      Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  requestCount  Int       @default(0)
+  successCount  Int       @default(0)
+  errorCount    Int       @default(0)
+
+  avgLatencyMs  Int       @default(0)
+  lastLatencyMs Int       @default(0)
+  lastStatus    String    @default("unknown")
+  lastError     String?   @db.Text
+  lastRequestAt DateTime?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("provider_usage")
+}
+
+// ============================================================================
 // SYSTEM CONFIGURATION
 // ============================================================================
 
 model SystemConfig {
   id            String    @id @default(uuid())
   key           String    @unique
-  value         String
+  value         String    @db.Text
   
   encrypted     Boolean   @default(false)
   description   String?

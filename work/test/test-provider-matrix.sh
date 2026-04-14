@@ -4,7 +4,7 @@ BASE_URL="${BASE_URL:-http://localhost:3000}"
 EMAIL="${EMAIL:-}"
 PASSWORD="${PASSWORD:-}"
 
-OLLAMA_MODELS="${OLLAMA_MODELS:-mistral}"
+OLLAMA_MODELS="${OLLAMA_MODELS:-smollm:latest}"
 GEMINI_MODEL="${GEMINI_MODEL:-gemini-1.5-flash}"
 OPENAI_MODEL="${OPENAI_MODEL:-gpt-4-turbo-preview}"
 

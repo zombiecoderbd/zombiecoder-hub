@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `messages` MODIFY `content` TEXT NOT NULL,
+    MODIFY `metadata` TEXT NULL;

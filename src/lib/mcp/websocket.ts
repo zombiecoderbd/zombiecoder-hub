@@ -1,7 +1,7 @@
 import { Server as HTTPServer } from 'http';
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import { getDbClient } from '../db/client';
-import { getAgentCore } from './agent-singleton';
+import { getAgentExecutor } from '../agent/executor';
 import { getToolExecutor } from '../agent/tools';
 import { getGovernanceValidator } from '../agent/governance';
 
@@ -124,43 +124,28 @@ export class MCPWebSocketServer {
         return;
       }
 
-      // Process message through agent
-      const agentCore = getAgentCore();
-      const response = await agentCore.processInteraction({
-        sessionId,
-        userId,
-        userMessage: message,
-        timestamp: new Date()
-      });
+      // Get agent executor for session
+      const executor = getAgentExecutor(sessionId, userId);
+      
+      // Get history for context
+      const history = await executor.getHistory(10);
+      
+      // Execute through agent
+      const response = await executor.execute([...history, { role: 'user', content: message }]);
 
       // Store agent response
-      await db.message.create({
-        data: {
-          sessionId,
-          role: 'assistant',
-          content: response.message,
-          metadata: JSON.stringify({
-            confidence: response.confidence,
-            toolUsed: response.toolUse
-          })
-        }
+      await executor.storeMessage('assistant', response.content, {
+        provider: response.provider,
+        executionTime: response.executionTime
       });
 
       // Stream response to all clients
       this.io.to(sessionId).emit('message', {
         role: 'assistant',
-        content: response.message,
-        confidence: response.confidence,
-        timestamp: response.timestamp
+        content: response.content,
+        provider: response.provider,
+        timestamp: new Date()
       });
-
-      // If tool was used, emit tool result
-      if (response.toolUse) {
-        this.io.to(sessionId).emit('tool-used', {
-          toolName: response.toolUse,
-          timestamp: new Date()
-        });
-      }
     } catch (error) {
       console.error('[v0] Error processing message:', error);
       socket.emit('error', {

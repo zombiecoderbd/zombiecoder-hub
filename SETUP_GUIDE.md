@@ -142,14 +142,14 @@ JWT_SECRET="your-generated-secret-here"
 # .env.local
 AI_PROVIDER="ollama"
 OLLAMA_BASE_URL="http://localhost:11434"
-OLLAMA_MODEL="mistral"  # or your preferred model
+OLLAMA_MODEL="smollm:latest"  # or your preferred model
 
 # Install and start Ollama
 # https://ollama.ai
 ollama serve
 
 # In another terminal, pull a model
-ollama pull mistral
+ollama pull smollm:latest
 ```
 
 ### OpenAI (Cloud)
@@ -165,7 +165,7 @@ OPENAI_MODEL="gpt-4-turbo-preview"
 # .env.local
 AI_PROVIDER="gemini"
 GEMINI_API_KEY="..."
-GEMINI_MODEL="gemini-pro"
+GEMINI_MODEL="gemini-flash-latest"
 ```
 
 ---
@@ -216,6 +216,8 @@ npm run dev
 npm run build
 
 # Start production server
+
+npm run build
 npm start
 
 # Lint code

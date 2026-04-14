@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZombieCoder Hub v2.0 - কোডবেজ অডিট রিপোর্ট</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-card: #161b22;
+      --bg-card-alt: #1c2330;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --heading: #f0f6fc;
+      --accent-red: #f85149;
+      --accent-orange: #d29922;
+      --accent-green: #3fb950;
+      --accent-blue: #58a6ff;
+      --accent-purple: #bc8cff;
+      --accent-cyan: #39d353;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Noto Sans Bengali', 'SolaimanLipi', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1e2e 0%, #0d1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    header .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    header .timestamp {
+      color: var(--accent-blue);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    nav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    .section {
+      margin: 30px 0;
+    }
+
+    .section-title {
+      font-size: 22px;
+      color: var(--heading);
+      border-bottom: 2px solid var(--accent-blue);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      color: var(--heading);
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .card li {
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .badge-critical { background: rgba(248,81,73,0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+    .badge-warning { background: rgba(210,153,34,0.2); color: var(--accent-orange); border: 1px solid var(--accent-orange); }
+    .badge-info { background: rgba(88,166,255,0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+    .badge-ok { background: rgba(63,185,80,0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .badge-demo { background: rgba(188,140,255,0.2); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+
+    .file-path {
+      font-family: 'Consolas', 'Courier New', monospace;
+      background: var(--bg-card-alt);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--accent-cyan);
+      word-break: break-all;
+    }
+
+    .code-block {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin: 10px 0;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .verdict {
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .verdict-bad {
+      background: rgba(248,81,73,0.1);
+      border-left: 4px solid var(--accent-red);
+      color: var(--accent-red);
+    }
+
+    .verdict-warn {
+      background: rgba(210,153,34,0.1);
+      border-left: 4px solid var(--accent-orange);
+      color: var(--accent-orange);
+    }
+
+    .verdict-good {
+      background: rgba(63,185,80,0.1);
+      border-left: 4px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .verdict-info {
+      background: rgba(88,166,255,0.1);
+      border-left: 4px solid var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 13px;
+    }
+
+    table th, table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table th {
+      background: var(--bg-card-alt);
+      color: var(--heading);
+      font-weight: 600;
+    }
+
+    table td {
+      color: var(--text);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .diagram {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+      font-family: 'Consolas', monospace;
+      font-size: 13px;
+      white-space: pre;
+      overflow-x: auto;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .separator {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 30px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ZombieCoder Hub v2.0 - কোডবেজ অডিট রিপোর্ট</h1>
+  <div class="subtitle">প্রতিটি ফাইল ও ফোল্ডারের টেকনিক্যাল বিশ্লেষণ, সমস্যা চিহ্নিতকরণ, WebSocket সংযোগ পর্যালোচনা</div>
+  <div class="timestamp">রিপোর্ট তৈরির সময়: ১৩ এপ্রিল ২০২৬ | বিশ্লেষক: Local Code Analysis | প্রজেক্ট রুট: /home/sahon/zombiecoder hub/</div>
+</header>
+
+<nav>
+  <a href="#summary">সারসংক্ষেপ</a>
+  <a href="#architecture">আর্কিটেকচার</a>
+  <a href="#websocket">WebSocket বিশ্লেষণ</a>
+  <a href="#demo-vs-real">ডেমো vs বাস্তব কোড</a>
+  <a href="#critical-bugs">গুরুতর বাগ</a>
+  <a href="#security">নিরাপত্তা সমস্যা</a>
+  <a href="#code-quality">কোড কোয়ালিটি</a>
+  <a href="#file-audit">ফাইল-বাই-ফাইল অডিট</a>
+  <a href="#recommendations">সুপারিশ</a>
+</nav>
+
+<div class="container">
+
+  <!-- ================================ -->
+  <!-- SECTION: SUMMARY -->
+  <!-- ================================ -->
+  <div id="summary" class="section">
+    <h2 class="section-title">সারসংক্ষেপ</h2>
+
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number" style="color: var(--accent-red);">7</div>
+        <div class="label">গুরুতর সমস্যা (Critical)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" style="color: var(--accent-orange);">9</div>
+        <div class="label">সতর্কতা (Warning)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" style="color: var(--accent-purple);">4</div>
+        <div class="label">ডেমো/Placeholder কোড</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" style="color: var(--accent-green);">12</div>
+        <div class="label">কার্যকর কোড (Working)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>প্রজেক্টের বর্তমান অবস্থা</h3>
+      <p>ZombieCoder Hub v2.0 একটি Next.js 16-ভিত্তিক AI Agent ম্যানেজমেন্ট সিস্টেম। প্রজেক্টের মূল কাঠামো দাড়িয়ে আছে, কিন্তু উল্লেখযোগ্য সংখ্যক কম্পোনেন্ট placeholder/demo অবস্থায় রয়েছে। নিচে বিস্তারিত বিশ্লেষণ দেওয়া হলো।</p>
+
+      <div class="verdict verdict-warn">
+        সামগ্রিক মূল্যায়ন: প্রজেক্টটি "Scaffolding Complete, Business Logic Incomplete" পর্যায়ে। প্রোডাকশনে ডিপ্লয়ের জন্য প্রস্তুত নয়।
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: ARCHITECTURE -->
+  <!-- ================================ -->
+  <div id="architecture" class="section">
+    <h2 class="section-title">আর্কিটেকচার ওভারভিউ</h2>
+
+    <div class="card">
+      <h3>টেকনোলজি স্ট্যাক</h3>
+      <table>
+        <tr><th>কম্পোনেন্ট</th><th>টেকনোলজি</th><th>অবস্থা</th></tr>
+        <tr><td>ফ্রন্টএন্ড</td><td>Next.js 16 + React 19</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>ব্যাকএন্ড</td><td>Next.js API Routes + Node.js HTTP Server</td><td><span class="badge badge-warning">আংশিক</span></td></tr>
+        <tr><td>ডাটাবেজ</td><td>MySQL + Prisma ORM v5.17</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>অথেনটিকেশন</td><td>JWT (jsonwebtoken) + bcryptjs</td><td><span class="badge badge-ok">কার্যকর</span></td></tr>
+        <tr><td>AI Provider</td><td>Ollama / OpenAI / Gemini (Fallback Chain)</td><td><span class="badge badge-ok">কার্যকর</span></td></tr>
+        <tr><td>WebSocket</td><td>Socket.IO v4.8 (পৃথক HTTP সার্ভার)</td><td><span class="badge badge-critical">সমস্যাযুক্ত</span></td></tr>
+        <tr><td>MCP Protocol</td><td>stdio (JSON-RPC 2.0)</td><td><span class="badge badge-ok">কার্যকর</span></td></tr>
+        <tr><td>UI Components</td><td>Radix UI + TailwindCSS v4</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>Governance</td><td>Custom GovernanceValidator</td><td><span class="badge badge-warning">আংশিক</span></td></tr>
+        <tr><td>Admin Panel</td><td>React Pages (app/admin/)</td><td><span class="badge badge-demo">ডেমো</span></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>ডিরেক্টরি কাঠামো মানচিত্র</h3>
+      <div class="diagram">zombiecoder hub/
+├── app/
+│   ├── api/
+│   │   ├── admin/models/       [API: মডেল ম্যানেজমেন্ট]       -- কার্যকর
+│   │   ├── agent/chat/         [API: AI চ্যাট]                 -- কার্যকর
+│   │   ├── agent/session/      [API: সেশন ম্যানেজমেন্ট]        -- কার্যকর
+│   │   ├── auth/login/         [API: লগইন]                    -- কার্যকর
+│   │   ├── auth/register/      [API: রেজিস্ট্রেশন]             -- কার্যকর
+│   │   ├── auth/logout/        [API: লগআউট]                   -- কার্যকর
+│   │   ├── auth/refresh/       [API: টোকেন রিফ্রেশ]            -- কার্যকর
+│   │   ├── health/             [API: হেলথ চেক]                -- কার্যকর
+│   │   └── user/               [API: প্রোফাইল/পাসওয়ার্ড]       -- কার্যকর
+│   ├── admin/                  [UI: Admin Dashboard]           -- ডেমো/Static
+│   ├── globals.css             [স্টাইল]                        -- OK
+│   └── layout.tsx              [Root Layout]                   -- OK
+├── src/
+│   ├── lib/
+│   │   ├── agent/
+│   │   │   ├── core.ts         [Agent Core Engine]             -- ডেমো (echo)
+│   │   │   ├── executor.ts     [Agent Executor]                -- কার্যকর
+│   │   │   ├── provider.ts     [AI Provider (পুরনো)]           -- ব্যবহৃত হচ্ছে না
+│   │   │   ├── provider-manager.ts [Provider Fallback]         -- কার্যকর
+│   │   │   ├── providers/
+│   │   │   │   ├── ollama.ts   [Ollama Provider]               -- কার্যকর
+│   │   │   │   ├── openai.ts   [OpenAI Provider]               -- কার্যকর
+│   │   │   │   └── gemini.ts   [Gemini Provider]               -- কার্যকর
+│   │   │   ├── governance.ts   [Governance Validator]           -- আংশিক
+│   │   │   ├── memory.ts       [Agent Memory]                  -- কার্যকর
+│   │   │   ├── tools.ts        [Tool Executor]                 -- কার্যকর
+│   │   │   └── system-prompt.ts [System Identity Prompt]       -- কার্যকর
+│   │   ├── api/
+│   │   │   ├── middleware.ts   [Auth Middleware]                -- কার্যকর
+│   │   │   └── response.ts    [Response Helpers]               -- কার্যকর
+│   │   ├── auth/
+│   │   │   ├── service.ts     [Auth Service]                   -- কার্যকর
+│   │   │   └── rbac.ts        [RBAC System]                    -- কার্যকর
+│   │   ├── config/
+│   │   │   └── index.ts       [System Config]                  -- কার্যকর
+│   │   ├── db/
+│   │   │   └── client.ts      [Prisma Client]                  -- কার্যকর
+│   │   └── mcp/
+│   │       ├── websocket.ts   [WebSocket Server]               -- সমস্যাযুক্ত
+│   │       └── agent-singleton.ts [Agent Singleton]            -- ডুপ্লিকেট
+│   └── middleware.ts           [Next.js Global Middleware]      -- কার্যকর
+├── scripts/
+│   ├── mcp-ws.ts              [WebSocket Launcher]             -- কার্যকর (কিন্তু isolated)
+│   ├── mcp-stdio.mjs          [MCP stdio Server]               -- কার্যকর
+│   ├── init-db.ts             [DB Initialization]              -- কার্যকর
+│   └── test-*.ts/ps1          [Test Scripts]                   -- ব্যবহারযোগ্য
+├── prisma/
+│   └── schema.prisma          [DB Schema]                      -- কার্যকর (সমস্যাসহ)
+├── components/
+│   ├── ui/ (57 files)         [Shadcn/Radix UI Components]     -- OK
+│   └── theme-provider.tsx     [Theme Provider]                 -- OK
+└── hooks/
+    ├── use-mobile.ts          [Mobile Hook]                    -- OK
+    └── use-toast.ts           [Toast Hook]                     -- OK</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: WEBSOCKET -->
+  <!-- ================================ -->
+  <div id="websocket" class="section">
+    <h2 class="section-title">WebSocket সংযোগ বিশ্লেষণ</h2>
+
+    <div class="card">
+      <h3>WebSocket কিভাবে যুক্ত আছে</h3>
+      <div class="diagram">
+                    Next.js App (Port 3000)
+                           |
+                    HTTP API Routes
+                   /api/agent/chat  ---> AgentExecutor ---> ProviderManager
+                   /api/agent/session        |                  |
+                           |                 |          Ollama/OpenAI/Gemini
+                           |                 |
+                    [পৃথক প্রসেস]             |
+                           |                 |
+              scripts/mcp-ws.ts (Port 3003)  |
+                           |                 |
+                    http.createServer()      |
+                           |                 |
+                MCPWebSocketServer (Socket.IO)
+                           |
+              "join-session" | "send-message" | "call-tool"
+                           |
+                    AgentCore (core.ts)  <--- ডেমো/Echo Response
+      </div>
+
+      <div class="verdict verdict-bad">
+        সমস্যা: WebSocket সার্ভার এবং Next.js মূল অ্যাপ সম্পূর্ণ পৃথক প্রসেসে চলে। WebSocket সার্ভার (mcp-ws.ts) Port 3003-এ একটি আলাদা HTTP সার্ভার তৈরি করে, যেটি Next.js-এর runtime-এর সঙ্গে কোনো সংযোগ রাখে না।
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>WebSocket-এর বর্তমান সমস্যা তালিকা</h3>
+
+      <h4 style="color: var(--accent-red); margin: 12px 0 6px;">1. দুই ভিন্ন Agent System ব্যবহৃত হচ্ছে</h4>
+      <p>WebSocket সার্ভার <span class="file-path">src/lib/mcp/websocket.ts</span> ব্যবহার করে <code>AgentCore</code> (core.ts), যেটি একটি echo/placeholder response দেয়:</p>
+      <div class="code-block">// core.ts - Line 210-225 (generateResponse method)
+// This is a placeholder - real implementation would call LLM
+const response: AgentResponse = {
+  sessionId: '',
+  message: `I received your message: "${userMessage}". I am ${agent.name}, ready to help.`,
+  confidence: 0.85,
+  timestamp: new Date()
+};</div>
+      <p>অথচ HTTP API Route <span class="file-path">app/api/agent/chat/route.ts</span> ব্যবহার করে <code>AgentExecutor</code> (executor.ts), যেটি আসল LLM Provider (Ollama/OpenAI/Gemini) কল করে।</p>
+      <div class="verdict verdict-bad">
+        ফলাফল: WebSocket দিয়ে মেসেজ পাঠালে শুধু echo পাওয়া যাবে, কোনো AI response আসবে না। HTTP API দিয়ে পাঠালে আসল AI response আসবে।
+      </div>
+
+      <h4 style="color: var(--accent-red); margin: 12px 0 6px;">2. WebSocket Next.js-এর সঙ্গে সমন্বিত নয়</h4>
+      <p>Next.js 14/15/16-তে custom WebSocket সার্ভার সরাসরি attach করা যায় না যেহেতু Vercel/Next.js নিজে HTTP সার্ভার manage করে। <span class="file-path">scripts/mcp-ws.ts</span> একটি আলাদা <code>http.createServer()</code> তৈরি করে Port 3003-এ।</p>
+      <div class="verdict verdict-warn">
+        ইন্ডাস্ট্রি বেস্ট প্র্যাকটিস: Next.js-এ WebSocket লাগলে হয় একটি আলাদা WebSocket সার্ভার (যেমন ws/Socket.IO) সত্যিই আলাদা সার্ভিস হিসেবে চালাতে হবে (যা ঠিক আছে), অথবা Vercel-এর মতো platform ব্যবহার করলে Server-Sent Events (SSE) ব্যবহার করতে হবে। বর্তমান কোডে Port 3003 সার্ভার চালু করতে <code>npm run mcp:ws</code> কমান্ড দিতে হয়, কিন্তু এটি সেটআপ ডকুমেন্টেশনে পরিষ্কার বলা নেই এবং কোনো process manager (PM2, systemd) কনফিগার করা নেই।
+      </div>
+
+      <h4 style="color: var(--accent-red); margin: 12px 0 6px;">3. WebSocket-এ Auth Validation এর ত্রুটি</h4>
+      <p><span class="file-path">websocket.ts</span> Line 242-250: <code>validateToken()</code> method JWT verify করে কিন্তু token payload থেকে userId extract করে session-এর userId-এর সঙ্গে মিলিয়ে দেখে না। যেকোনো valid JWT token দিয়ে যেকোনো session-এ join করা সম্ভব।</p>
+      <div class="code-block">private async validateToken(token: string): Promise&lt;boolean&gt; {
+  try {
+    const { verifyJWT } = await import('../auth/service');
+    const payload = await verifyJWT(token);
+    return !!payload;  // শুধু token valid কিনা চেক করে, userId match করে না
+  } catch {
+    return false;
+  }
+}</div>
+
+      <h4 style="color: var(--accent-orange); margin: 12px 0 6px;">4. WebSocket Client-Side Code অনুপস্থিত</h4>
+      <p>পুরো codebase-এ কোথাও WebSocket client-side implementation নেই। কোনো React component Socket.IO-তে connect করে না। শুধু PowerShell test script আছে।</p>
+    </div>
+
+    <div class="card">
+      <h3>কি হওয়া উচিত ছিল (Industry Standard)</h3>
+      <table>
+        <tr><th>বর্তমান অবস্থা</th><th>প্রত্যাশিত অবস্থা</th></tr>
+        <tr>
+          <td>WebSocket AgentCore ব্যবহার করে (echo response)</td>
+          <td>WebSocket-ও AgentExecutor + ProviderManager ব্যবহার করবে, যাতে আসল LLM response আসে</td>
+        </tr>
+        <tr>
+          <td>WebSocket auth শুধু token validity চেক করে</td>
+          <td>Token থেকে userId extract করে session ownership verify করবে, rate limiting থাকবে</td>
+        </tr>
+        <tr>
+          <td>Client-side WebSocket code নেই</td>
+          <td>React hook (useWebSocket) থাকবে যা Socket.IO client connect করবে, reconnection, error handling সহ</td>
+        </tr>
+        <tr>
+          <td>কোনো heartbeat/ping-pong নেই</td>
+          <td>Connection health monitoring, automatic reconnection, exponential backoff থাকবে</td>
+        </tr>
+        <tr>
+          <td>WebSocket সার্ভার manually চালু করতে হয়</td>
+          <td>PM2/Docker/systemd দিয়ে auto-start এবং crash recovery কনফিগার থাকবে</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: DEMO VS REAL CODE -->
+  <!-- ================================ -->
+  <div id="demo-vs-real" class="section">
+    <h2 class="section-title">ডেমো কোড vs বাস্তব কোড বিশ্লেষণ</h2>
+
+    <div class="card">
+      <h3>যে কোডগুলো ডেমো/Placeholder <span class="badge badge-demo">DEMO</span></h3>
+
+      <h4 style="color: var(--accent-purple); margin: 12px 0 6px;">1. AgentCore - generateResponse() <span class="badge badge-critical">গুরুতর</span></h4>
+      <p><span class="file-path">src/lib/agent/core.ts</span> Line 205-226</p>
+      <p>এই ফাংশনটি Agent-এর মূল brain - যেটি user message পেয়ে AI response generate করার কথা। কিন্তু এটি শুধু echo করে:</p>
+      <div class="code-block">message: `I received your message: "${userMessage}". I am ${agent.name}, ready to help.`
+confidence: 0.85  // hardcoded confidence - কোনো বাস্তব মূল্যায়ন নেই</div>
+      <p><strong>কি হওয়া উচিত:</strong> ProviderManager.sendMessage() কল করে actual LLM থেকে response আনা উচিত। executor.ts-এ এটি সঠিকভাবে করা হয়েছে - core.ts-এ করা হয়নি।</p>
+
+      <h4 style="color: var(--accent-purple); margin: 12px 0 6px;">2. Admin Dashboard Pages <span class="badge badge-demo">DEMO</span></h4>
+      <p><span class="file-path">app/admin/page.tsx</span> + সব admin sub-pages</p>
+      <p>Admin Dashboard-এ সব metric card-এ <code>value={"-"}</code> দেওয়া আছে। কোনো API থেকে data fetch করা হচ্ছে না। Users, Agents, Sessions, Tools, Governance, Logs, Settings - সব page static UI।</p>
+      <div class="code-block">// admin/page.tsx
+&lt;MetricCard label="Total Users" value={"-"} icon={...} color="blue" /&gt;
+&lt;MetricCard label="Active Agents" value={"-"} icon={...} color="purple" /&gt;
+// "-" মানে কোনো API call হচ্ছে না, শুধু static placeholder</div>
+      <p><strong>কি হওয়া উচিত:</strong> useEffect/SWR/React Query দিয়ে backend API কল করে real-time data দেখানো উচিত।</p>
+
+      <h4 style="color: var(--accent-purple); margin: 12px 0 6px;">3. provider.ts - পুরাতন/ব্যবহৃত হচ্ছে না <span class="badge badge-warning">Dead Code</span></h4>
+      <p><span class="file-path">src/lib/agent/provider.ts</span></p>
+      <p>এই ফাইলটি একটি পুরনো ProviderManager implementation ধারণ করে (OllamaProvider, OpenAIProvider classes)। কিন্তু actual system ব্যবহার করে <span class="file-path">src/lib/agent/provider-manager.ts</span> এবং <span class="file-path">src/lib/agent/providers/</span> ফোল্ডারের ফাইলগুলো। এই ফাইলটি dead code।</p>
+      <div class="verdict verdict-warn">
+        কেউ import করছে না। Codebase-এ confusion তৈরি করে। মুছে ফেলা উচিত অথবা deprecated হিসেবে mark করা উচিত।
+      </div>
+
+      <h4 style="color: var(--accent-purple); margin: 12px 0 6px;">4. Gemini Provider logUsage() <span class="badge badge-warning">Incomplete</span></h4>
+      <p><span class="file-path">src/lib/agent/providers/gemini.ts</span> Line 162-178</p>
+      <p>Gemini-এর logUsage() শুধু console.log করে। Ollama ও OpenAI provider DB-তে audit log রাখে, কিন্তু Gemini রাখে না।</p>
+      <div class="code-block">// gemini.ts logUsage - শুধু console.log
+async logUsage(...): Promise&lt;void&gt; {
+  console.log('[Gemini] Usage logged:', { ... });
+  // DB-তে কিছু লেখে না!
+}
+
+// ollama.ts logUsage - DB-তে লেখে
+async logUsage(...): Promise&lt;void&gt; {
+  const db = getDbClient();
+  await db.auditLog.create({ data: { ... } });
+}</div>
+    </div>
+
+    <div class="card">
+      <h3>যে কোডগুলো আসলেই কার্যকর (Real/Working) <span class="badge badge-ok">REAL</span></h3>
+
+      <table>
+        <tr><th>ফাইল</th><th>ফাংশনালিটি</th><th>মন্তব্য</th></tr>
+        <tr>
+          <td class="file-path">app/api/agent/chat/route.ts</td>
+          <td>AI Chat API</td>
+          <td>AgentExecutor ব্যবহার করে সত্যিকার LLM call করে। JWT auth, session ownership check, audit logging সব আছে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/executor.ts</td>
+          <td>Agent Executor</td>
+          <td>ProviderManager কল করে, usage stats record করে, conversation history manage করে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/provider-manager.ts</td>
+          <td>Provider Fallback Chain</td>
+          <td>Ollama--> OpenAI --> Gemini fallback chain কার্যকর। System prompt inject করে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/providers/*.ts</td>
+          <td>AI Model Providers</td>
+          <td>Ollama (chat+generate API), OpenAI (chat completions), Gemini (generateContent) - তিনটাই real API call করে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/auth/service.ts</td>
+          <td>Authentication</td>
+          <td>bcrypt hashing, JWT sign/verify, password strength validation - সব কার্যকর।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/auth/rbac.ts</td>
+          <td>Role-Based Access Control</td>
+          <td>ADMIN/CLIENT role, permission matrix, convenience functions - সব কার্যকর।</td>
+        </tr>
+        <tr>
+          <td class="file-path">app/api/auth/login/route.ts</td>
+          <td>Login API</td>
+          <td>Email+password verify, token pair generate, session create, audit log - সব কার্যকর।</td>
+        </tr>
+        <tr>
+          <td class="file-path">app/api/auth/register/route.ts</td>
+          <td>Registration API</td>
+          <td>Validation, password strength, duplicate check, token generate - সব কার্যকর।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/tools.ts</td>
+          <td>Tool Executor</td>
+          <td>read-file, write-file, execute-command, search-files - governance check সহ কার্যকর।</td>
+        </tr>
+        <tr>
+          <td class="file-path">scripts/mcp-stdio.mjs</td>
+          <td>MCP stdio Server</td>
+          <td>JSON-RPC 2.0 protocol, tools/list, tools/call, auto-login - কার্যকর MCP implementation।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/system-prompt.ts</td>
+          <td>System Identity Injection</td>
+          <td>identity.json থেকে system prompt build করে AI messages-এ prepend করে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">src/lib/agent/governance.ts</td>
+          <td>Governance Validator</td>
+          <td>Policy check, risk assessment, compliance - structure কার্যকর, কিন্তু policies manually seed করতে হবে।</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: CRITICAL BUGS -->
+  <!-- ================================ -->
+  <div id="critical-bugs" class="section">
+    <h2 class="section-title">গুরুতর বাগ ও সমস্যা</h2>
+
+    <div class="card">
+      <h3>BUG-1: Duplicate Singleton (AgentCore) <span class="badge badge-critical">CRITICAL</span></h3>
+      <p><code>getAgentCore()</code> ফাংশন দুই জায়গায় define করা আছে:</p>
+      <ul>
+        <li><span class="file-path">src/lib/agent/core.ts</span> Line 349-356</li>
+        <li><span class="file-path">src/lib/mcp/agent-singleton.ts</span> Line 10-15</li>
+      </ul>
+      <p>দুটি আলাদা singleton instance তৈরি হবে। WebSocket সার্ভার <code>agent-singleton.ts</code> import করে, কিন্তু core.ts-ও নিজের singleton export করে। এটি state inconsistency তৈরি করতে পারে।</p>
+      <div class="verdict verdict-bad">
+        একটি রাখতে হবে। core.ts থেকে singleton export সরিয়ে শুধু agent-singleton.ts ব্যবহার করা উচিত, অথবা উল্টোটা।
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>BUG-2: Task model-এ 'result' field নেই <span class="badge badge-critical">CRITICAL</span></h3>
+      <p><span class="file-path">src/lib/agent/core.ts</span> Line 175:</p>
+      <div class="code-block">const task = await db2.task.create({
+  data: {
+    sessionId: interaction.sessionId,
+    title: `User: "${interaction.userMessage.substring(0, 50)}..."`,
+    description: interaction.userMessage,
+    status: 'COMPLETED',
+    result: agentResponse.message  // <-- 'result' field নেই Prisma schema-তে!
+  }
+});</div>
+      <p>Prisma schema-র Task model-এ <code>result</code> field নেই। এই কোড runtime error দেবে যদি AgentCore.processInteraction() কল হয়।</p>
+    </div>
+
+    <div class="card">
+      <h3>BUG-3: AgentMemory-তে sessionId field নেই <span class="badge badge-critical">CRITICAL</span></h3>
+      <p><span class="file-path">src/lib/agent/memory.ts</span> Line 153-166: <code>storeMemory()</code> method <code>sessionId</code> field ব্যবহার করে। কিন্তু Prisma schema-র <code>AgentMemory</code> model-এ <code>sessionId</code> field নেই। শুধু <code>agentId</code> আছে।</p>
+      <div class="code-block">// memory.ts - sessionId ব্যবহার করছে
+await db.agentMemory.create({
+  data: {
+    agentId: entry.agentId,
+    sessionId: entry.sessionId,  // <-- Prisma schema-তে এই field নেই!
+    ...
+  }
+});</div>
+      <p>Prisma schema-র AgentMemory model দেখুন - শুধু agentId, type, content, embedding, metadata আছে, sessionId নেই।</p>
+    </div>
+
+    <div class="card">
+      <h3>BUG-4: identity.json-এ database "SQLite" লেখা কিন্তু আসলে MySQL ব্যবহৃত <span class="badge badge-warning">Misleading</span></h3>
+      <p><span class="file-path">identity.json</span> Line 32: <code>"database": "SQLite with Prisma ORM"</code></p>
+      <p>কিন্তু <span class="file-path">prisma/schema.prisma</span> Line 9: <code>provider = "mysql"</code></p>
+      <p>এবং <span class="file-path">.env.local</span> Line 29: <code>DATABASE_URL="mysql://root:105585@localhost:3306/zombiecoder"</code></p>
+      <p>আবার prisma schema-র comment-এ লেখা আছে "Removed for SQLite compatibility" (Line 14) - যদিও MySQL ব্যবহৃত হচ্ছে। এটি বিভ্রান্তিকর।</p>
+    </div>
+
+    <div class="card">
+      <h3>BUG-5: next.config.mjs - TypeScript Errors Ignore করা হয়েছে <span class="badge badge-warning">WARNING</span></h3>
+      <p><span class="file-path">next.config.mjs</span> Line 3-4:</p>
+      <div class="code-block">typescript: {
+  ignoreBuildErrors: true,  // Production build-এও TypeScript error ignore হবে
+}</div>
+      <p>এটি মানে build time-এ type errors ধরা পড়বে না। Production code-এ runtime crash হতে পারে এমন type মিসম্যাচ থাকতে পারে (যেমন উপরের BUG-2, BUG-3)।</p>
+    </div>
+
+    <div class="card">
+      <h3>BUG-6: Duplicate CSS File <span class="badge badge-info">INFO</span></h3>
+      <p><span class="file-path">app/globals.css</span> এবং <span class="file-path">styles/globals.css</span> দুটি একই ফাইল (দুটোই 4353 bytes)। app/globals.css import হচ্ছে layout.tsx-এ।</p>
+    </div>
+
+    <div class="card">
+      <h3>BUG-7: hooks/ ও components/ui/ এ Duplicate File <span class="badge badge-info">INFO</span></h3>
+      <p><span class="file-path">hooks/use-mobile.ts</span> এবং <span class="file-path">components/ui/use-mobile.tsx</span> একই 565 bytes।</p>
+      <p><span class="file-path">hooks/use-toast.ts</span> এবং <span class="file-path">components/ui/use-toast.ts</span> একই 3945 bytes।</p>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: SECURITY -->
+  <!-- ================================ -->
+  <div id="security" class="section">
+    <h2 class="section-title">নিরাপত্তা সমস্যা</h2>
+
+    <div class="card">
+      <h3>SEC-1: .env.local-এ Plaintext Credentials <span class="badge badge-critical">CRITICAL</span></h3>
+      <p><span class="file-path">.env.local</span> Git-tracked হওয়া উচিত নয়। এই ফাইলে database password, JWT secret, API keys সব plaintext আছে:</p>
+      <ul>
+        <li>MySQL root password: <code>105585</code></li>
+        <li>JWT Secret: <code>s71AtLJ5+689A1WbD7iPTVRYSKOSuMOq8xh4Ca2caEA=</code></li>
+        <li>Gemini API Key: <code>AIzaSyB1hFbncerF7ZZ1sLz9NIOvFCnw6wmdMdM</code></li>
+        <li>OpenAI Key: placeholder (<code>sk-your-openai-api-key-here</code>)</li>
+      </ul>
+      <div class="verdict verdict-bad">
+        .gitignore চেক করুন - .env.local .gitignore-এ আছে কিনা। যদি কখনো git push হয়ে থাকে, তাহলে সব key rotate করতে হবে। JWT_SECRET Production-এ change করতে হবে।
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>SEC-2: JWT Secret একই Admin ও User দুটোতে <span class="badge badge-warning">WARNING</span></h3>
+      <p><span class="file-path">.env.local</span>:</p>
+      <div class="code-block">JWT_SECRET=s71AtLJ5+689A1WbD7iPTVRYSKOSuMOq8xh4Ca2caEA=
+ADMIN_JWT_SECRET=s71AtLJ5+689A1WbD7iPTVRYSKOSuMOq8xh4Ca2caEA=</div>
+      <p>দুটি একই value। Industry practice: Admin ও regular user-এর JWT secret আলাদা রাখা উচিত। একটি compromise হলে অন্যটি না।</p>
+    </div>
+
+    <div class="card">
+      <h3>SEC-3: Rate Limiting Implement হয়নি <span class="badge badge-warning">WARNING</span></h3>
+      <p><span class="file-path">src/lib/api/middleware.ts</span> Line 92-103: <code>addRateLimitHeaders()</code> function আছে যেটি response headers সেট করে, কিন্তু actual rate limiting (request counting, blocking) implement করা হয়নি। Headers শুধু cosmetic।</p>
+    </div>
+
+    <div class="card">
+      <h3>SEC-4: Tool Executor - Command Injection সম্ভব <span class="badge badge-warning">WARNING</span></h3>
+      <p><span class="file-path">src/lib/agent/tools.ts</span>: <code>execute-command</code> tool-এ command whitelist নেই। যদিও <code>shell: false</code> ব্যবহৃত হয়েছে (ভালো), কিন্তু কোনো command blacklist বা allowlist নেই। Governance check শুধু high-level (EXECUTE operation), specific command নিয়ন্ত্রণ করে না।</p>
+    </div>
+
+    <div class="card">
+      <h3>SEC-5: Vercel Analytics (@vercel/analytics) Layout-এ যুক্ত <span class="badge badge-info">INFO</span></h3>
+      <p><span class="file-path">app/layout.tsx</span> Line 3:</p>
+      <div class="code-block">import { Analytics } from '@vercel/analytics/next'
+// ...
+&lt;Analytics /&gt;</div>
+      <p>এটি Vercel-এর তৃতীয়-পক্ষ tracking। "Local-first, no cloud dependencies" দাবির সঙ্গে সাংঘর্ষিক। identity.json বলছে <code>"data_privacy": "On-Device Processing, No Cloud Dependencies"</code>, কিন্তু layout-এ Vercel Analytics যুক্ত।</p>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: CODE QUALITY -->
+  <!-- ================================ -->
+  <div id="code-quality" class="section">
+    <h2 class="section-title">কোড কোয়ালিটি বিশ্লেষণ</h2>
+
+    <div class="card">
+      <h3>ভালো দিকগুলো (Positive Aspects)</h3>
+      <ul>
+        <li>Prisma schema ভালোভাবে ডিজাইন করা হয়েছে - relations, indexes, cascade deletes সব correct।</li>
+        <li>AI Provider fallback chain (Ollama -> OpenAI -> Gemini) ভালো ডিজাইন - error হলে পরেরটি চেষ্টা করে।</li>
+        <li>Authentication system (JWT + bcrypt) industry standard অনুযায়ী implement করা হয়েছে। Password strength validation আছে (12 char, uppercase, lowercase, number, special char)।</li>
+        <li>RBAC system পরিষ্কার permission matrix দিয়ে implement করা। Admin/Client role separation proper।</li>
+        <li>API response format consistent - success/error/validationError helpers ব্যবহৃত হয়।</li>
+        <li>Tool Executor-এ path traversal protection আছে (resolveSafePath)।</li>
+        <li>Governance framework-এর architecture ভালো - policy-based validation, risk scoring, audit trail।</li>
+        <li>MCP stdio server JSON-RPC 2.0 compliant - standard protocol follow করছে।</li>
+        <li>System prompt inject করে identity.json থেকে - একটি ভালো approach।</li>
+        <li>Singleton pattern ব্যবহৃত হয়েছে DB client, providers-এ - correct pattern।</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>খারাপ দিকগুলো (Negative Aspects)</h3>
+      <ul>
+        <li><strong>Dead code:</strong> provider.ts (318 lines) কেউ ব্যবহার করছে না, কিন্তু রয়ে গেছে।</li>
+        <li><strong>Duplicate singletons:</strong> AgentCore দুই জায়গায় singleton, confusion তৈরি করে।</li>
+        <li><strong>Inconsistent usage:</strong> HTTP API ব্যবহার করে executor.ts, WebSocket ব্যবহার করে core.ts - দুটি ভিন্ন path।</li>
+        <li><strong>No unit tests:</strong> পুরো codebase-এ কোনো test file নেই (শুধু PowerShell integration test scripts)।</li>
+        <li><strong>No error boundary:</strong> React component-এ error boundary নেই।</li>
+        <li><strong>No logging framework:</strong> সব জায়গায় console.log/console.error ব্যবহৃত। Production-এ structured logging (Winston/Pino) থাকা উচিত।</li>
+        <li><strong>No input sanitization:</strong> API route-এ Zod validation define আছে package.json-এ কিন্তু কোথাও ব্যবহৃত হয়নি। Manual validation করা হচ্ছে।</li>
+        <li><strong>Memory leak risk:</strong> AgentMemory-তে conversationCache এবং sessionContexts Map-এ clearSession() call না হলে memory leak হবে।</li>
+        <li><strong>No database migration:</strong> prisma/migrations ফোল্ডার আছে কিন্তু migration status অজানা।</li>
+        <li><strong>Prisma schema comment বিভ্রান্তিকর:</strong> "Removed for SQLite compatibility" কিন্তু MySQL ব্যবহৃত হচ্ছে। enum ব্যবহার করা যেত MySQL-এ।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: FILE AUDIT -->
+  <!-- ================================ -->
+  <div id="file-audit" class="section">
+    <h2 class="section-title">ফাইল-বাই-ফাইল অডিট</h2>
+
+    <div class="card">
+      <h3>Core Configuration Files</h3>
+      <table>
+        <tr><th>ফাইল</th><th>আকার</th><th>অবস্থা</th><th>সমস্যা</th></tr>
+        <tr>
+          <td class="file-path">package.json</td>
+          <td>3KB</td>
+          <td><span class="badge badge-ok">OK</span></td>
+          <td>Dependencies up-to-date। socket.io ও socket.io-client দুটোই আছে কিন্তু client ব্যবহৃত হচ্ছে না।</td>
+        </tr>
+        <tr>
+          <td class="file-path">next.config.mjs</td>
+          <td>484B</td>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>ignoreBuildErrors: true। images unoptimized। allowedDevOrigins-এ IP address hardcoded।</td>
+        </tr>
+        <tr>
+          <td class="file-path">tsconfig.json</td>
+          <td>695B</td>
+          <td><span class="badge badge-ok">OK</span></td>
+          <td>Standard Next.js config। jsx: "react-jsx" set, paths alias configured।</td>
+        </tr>
+        <tr>
+          <td class="file-path">identity.json</td>
+          <td>2.4KB</td>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>Database "SQLite" বলছে কিন্তু MySQL ব্যবহৃত। Personal contact info (phone, address) plaintext।</td>
+        </tr>
+        <tr>
+          <td class="file-path">prisma/schema.prisma</td>
+          <td>14KB</td>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>AgentMemory-তে sessionId field নেই যা code-এ ব্যবহৃত। Task-এ result field নেই। Comment "SQLite" কিন্তু MySQL provider।</td>
+        </tr>
+        <tr>
+          <td class="file-path">.env.local</td>
+          <td>4.9KB</td>
+          <td><span class="badge badge-critical">CRITICAL</span></td>
+          <td>Real credentials থাকার সম্ভাবনা। Git-e push হওয়া উচিত নয়।</td>
+        </tr>
+        <tr>
+          <td class="file-path">components.json</td>
+          <td>427B</td>
+          <td><span class="badge badge-ok">OK</span></td>
+          <td>Shadcn/ui configuration।</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Source Code (src/lib/)</h3>
+      <table>
+        <tr><th>ফাইল</th><th>আকার</th><th>অবস্থা</th><th>সমস্যা</th></tr>
+        <tr>
+          <td class="file-path">agent/core.ts</td>
+          <td>9.5KB</td>
+          <td><span class="badge badge-demo">DEMO</span></td>
+          <td>generateResponse() echo করে। Task create-এ 'result' field ব্যবহার করে যা schema-তে নেই। Duplicate singleton।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/executor.ts</td>
+          <td>8.3KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Real LLM call করে, usage stats record করে। Production-ready code।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/provider.ts</td>
+          <td>8.7KB</td>
+          <td><span class="badge badge-demo">Dead Code</span></td>
+          <td>কেউ import করে না। পুরনো implementation। মুছে ফেলা উচিত।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/provider-manager.ts</td>
+          <td>4.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Ollama -> OpenAI -> Gemini fallback। System prompt prepend। Production-ready।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/providers/ollama.ts</td>
+          <td>4.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>/api/chat fallback to /api/generate। Audit logging আছে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/providers/openai.ts</td>
+          <td>3.9KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Placeholder key detection আছে (sk-your-*)। Audit logging আছে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/providers/gemini.ts</td>
+          <td>4.8KB</td>
+          <td><span class="badge badge-warning">আংশিক</span></td>
+          <td>Model fallback chain ভালো। কিন্তু logUsage() শুধু console.log, DB-তে লেখে না।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/governance.ts</td>
+          <td>9.9KB</td>
+          <td><span class="badge badge-warning">আংশিক</span></td>
+          <td>Framework ভালো কিন্তু policies DB-তে seed না করা থাকলে governance check-এ কোনো rule apply হবে না।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/memory.ts</td>
+          <td>6.7KB</td>
+          <td><span class="badge badge-warning">সমস্যাযুক্ত</span></td>
+          <td>storeMemory() sessionId ব্যবহার করে যা schema-তে নেই। Relevance calculation primitive (keyword matching)।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/tools.ts</td>
+          <td>18.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>4টি tool registered। Path traversal protection আছে। Governance check আছে। Confirmation required for HIGH risk।</td>
+        </tr>
+        <tr>
+          <td class="file-path">agent/system-prompt.ts</td>
+          <td>1.6KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>identity.json থেকে system message build করে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">api/middleware.ts</td>
+          <td>4KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Auth verification, role checking, security headers - সব কার্যকর। Rate limiting শুধু headers, actual counting নেই।</td>
+        </tr>
+        <tr>
+          <td class="file-path">api/response.ts</td>
+          <td>3.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Consistent response format।</td>
+        </tr>
+        <tr>
+          <td class="file-path">auth/service.ts</td>
+          <td>4.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>bcrypt, JWT, password validation - সব industry standard।</td>
+        </tr>
+        <tr>
+          <td class="file-path">auth/rbac.ts</td>
+          <td>8.7KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Complete RBAC system। Permission matrix, convenience functions।</td>
+        </tr>
+        <tr>
+          <td class="file-path">config/index.ts</td>
+          <td>9.6KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Config loading, env validation, constants - সব ভালো।</td>
+        </tr>
+        <tr>
+          <td class="file-path">db/client.ts</td>
+          <td>1.1KB</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Standard Prisma singleton pattern। Health check আছে।</td>
+        </tr>
+        <tr>
+          <td class="file-path">mcp/websocket.ts</td>
+          <td>7.7KB</td>
+          <td><span class="badge badge-critical">সমস্যাযুক্ত</span></td>
+          <td>AgentCore (demo) ব্যবহার করে, auth অসম্পূর্ণ, client-side code নেই।</td>
+        </tr>
+        <tr>
+          <td class="file-path">mcp/agent-singleton.ts</td>
+          <td>419B</td>
+          <td><span class="badge badge-warning">Duplicate</span></td>
+          <td>core.ts-এও getAgentCore() আছে।</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Next.js Middleware ও Layout</h3>
+      <table>
+        <tr><th>ফাইল</th><th>অবস্থা</th><th>মন্তব্য</th></tr>
+        <tr>
+          <td class="file-path">src/middleware.ts</td>
+          <td><span class="badge badge-ok">কার্যকর</span></td>
+          <td>Identity watermark headers সব response-এ যোগ করে। Security headers আছে। Matcher configured।</td>
+        </tr>
+        <tr>
+          <td class="file-path">app/layout.tsx</td>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>@vercel/analytics import - "Local-first" দাবির সঙ্গে সাংঘর্ষিক।</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Documentation (doc/ ফোল্ডার)</h3>
+      <p>18টি markdown documentation file আছে। অনেকগুলো phase summary, completion report, roadmap ইত্যাদি। কিন্তু বেশিরভাগই outdated (project-এর আগের version-এর)। কিছু contradiction আছে - যেমন SYSTEM_COMPLETE.md বলছে সিস্টেম complete, কিন্তু AgentCore এখনো echo করছে।</p>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- SECTION: RECOMMENDATIONS -->
+  <!-- ================================ -->
+  <div id="recommendations" class="section">
+    <h2 class="section-title">সুপারিশ (Priority অনুযায়ী)</h2>
+
+    <div class="card">
+      <h3>Priority 1 - এখনই ঠিক করতে হবে</h3>
+      <table>
+        <tr><th>#</th><th>কাজ</th><th>কারণ</th></tr>
+        <tr>
+          <td>1</td>
+          <td>Prisma schema-তে Task model-এ <code>result String? @db.Text</code> field যোগ করুন</td>
+          <td>core.ts কোড crash করবে এই field ছাড়া</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Prisma schema-তে AgentMemory model-এ <code>sessionId String?</code> field যোগ করুন</td>
+          <td>memory.ts কোড crash করবে এই field ছাড়া</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>next.config.mjs থেকে <code>ignoreBuildErrors: true</code> সরান</td>
+          <td>Type errors Production-এ crash করবে</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>.env.local Git history-তে আছে কিনা চেক করুন। থাকলে সব key rotate করুন।</td>
+          <td>Database password, JWT secret, API keys exposed</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>WebSocket সার্ভারে AgentCore-এর বদলে AgentExecutor ব্যবহার করুন</td>
+          <td>বর্তমানে WebSocket দিয়ে শুধু echo আসে, AI response আসে না</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Priority 2 - শীঘ্রই করা উচিত</h3>
+      <table>
+        <tr><th>#</th><th>কাজ</th><th>কারণ</th></tr>
+        <tr>
+          <td>6</td>
+          <td>Dead code (provider.ts) মুছুন বা deprecated mark করুন</td>
+          <td>Confusion তৈরি করে, maintenance burden</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Duplicate singleton (core.ts vs agent-singleton.ts) - একটি রাখুন</td>
+          <td>State inconsistency সম্ভব</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Gemini logUsage() DB audit logging যোগ করুন</td>
+          <td>Audit trail incomplete</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Admin Dashboard-এ real API data fetch করুন</td>
+          <td>বর্তমানে সব static "-" দেখাচ্ছে</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>identity.json-এ "SQLite" -> "MySQL" update করুন</td>
+          <td>বিভ্রান্তিকর তথ্য</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Rate limiting আসলে implement করুন (Redis/in-memory)</td>
+          <td>বর্তমানে শুধু headers, actual blocking নেই</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Vercel Analytics সরান অথবা identity.json-এ "No Cloud Dependencies" claim সরান</td>
+          <td>Self-contradictory</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Priority 3 - Production-এ যাওয়ার আগে</h3>
+      <table>
+        <tr><th>#</th><th>কাজ</th><th>কারণ</th></tr>
+        <tr>
+          <td>13</td>
+          <td>Unit tests লিখুন (Jest/Vitest)</td>
+          <td>কোনো test নেই - regression ধরা যাবে না</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Zod validation ব্যবহার করুন API route-এ</td>
+          <td>Package installed আছে কিন্তু ব্যবহৃত হচ্ছে না</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Structured logging (Winston/Pino) ব্যবহার করুন</td>
+          <td>Production-এ console.log debuggability কম</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>WebSocket client-side React hook তৈরি করুন</td>
+          <td>Real-time feature ব্যবহারযোগ্য নয় client-side code ছাড়া</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Governance policy seed script তৈরি করুন</td>
+          <td>বর্তমানে DB-তে কোনো policy নেই, governance check-এ কোনো rule apply হয় না</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Duplicate files (globals.css, hooks) পরিষ্কার করুন</td>
+          <td>Confusion ও maintenance burden</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <hr class="separator">
+
+  <!-- ================================ -->
+  <!-- FINAL VERDICT -->
+  <!-- ================================ -->
+  <div class="section">
+    <h2 class="section-title">চূড়ান্ত মূল্যায়ন</h2>
+
+    <div class="card">
+      <h3>সত্য কথা</h3>
+      <p>ZombieCoder Hub v2.0 একটি ambitious project যার architecture ভালো কিন্তু execution অসম্পূর্ণ।</p>
+
+      <div class="two-col">
+        <div>
+          <div class="verdict verdict-good" style="margin-bottom: 8px;">
+            <strong>কি ঠিক আছে:</strong>
+          </div>
+          <ul style="margin-left: 16px; font-size: 13px;">
+            <li>AI Provider fallback chain (executor.ts + provider-manager.ts) production-ready</li>
+            <li>Authentication system (JWT + bcrypt + RBAC) industry standard</li>
+            <li>HTTP API routes (chat, session, auth) working code</li>
+            <li>MCP stdio server functional</li>
+            <li>Prisma schema well-designed (কিছু missing fields ছাড়া)</li>
+            <li>Tool executor governance-aware</li>
+          </ul>
+        </div>
+        <div>
+          <div class="verdict verdict-bad" style="margin-bottom: 8px;">
+            <strong>কি ঠিক নেই:</strong>
+          </div>
+          <ul style="margin-left: 16px; font-size: 13px;">
+            <li>WebSocket server demo AgentCore ব্যবহার করে (echo response)</li>
+            <li>Admin panel 100% static UI</li>
+            <li>Prisma schema-তে missing fields (result, sessionId) code crash করবে</li>
+            <li>Dead code, duplicate singletons, duplicate files</li>
+            <li>TypeScript errors build time-এ ignore হচ্ছে</li>
+            <li>No tests, no Zod validation (installed but unused)</li>
+            <li>WebSocket client-side code অনুপস্থিত</li>
+            <li>"No Cloud Dependencies" claim কিন্তু Vercel Analytics present</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="verdict verdict-info" style="margin-top: 16px;">
+        <strong>Production Readiness:</strong> HTTP API route-ভিত্তিক chat কার্যকর - একজন ইউজার register, login করে, session তৈরি করে, /api/agent/chat-এ মেসেজ পাঠিয়ে Ollama/OpenAI/Gemini থেকে response পেতে পারে। WebSocket ও Admin panel production-ready নয়। সামগ্রিকভাবে project-টি ~55-60% complete।
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  রিপোর্ট তৈরি হয়েছে: ১৩ এপ্রিল ২০২৬ | Local Code Analysis | কোনো কর্পোরেট bias ছাড়া, শুধুমাত্র code-এ যা আছে তার ভিত্তিতে
+</footer>
+
+</body>
+</html>

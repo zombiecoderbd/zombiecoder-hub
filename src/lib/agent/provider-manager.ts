@@ -9,6 +9,7 @@ export type ManagedProvider = 'ollama' | 'openai' | 'gemini' | 'manual';
 export interface ManagedAIResponse {
   content: string;
   provider: ManagedProvider;
+  model?: string;
   executionTime: number;
 }
 
@@ -22,14 +23,17 @@ export class ProviderManager {
     messages: OllamaMessage[],
     overrides?: ProviderOverrides
   ): Promise<ManagedAIResponse> {
+    // ... earlier implementation remains ...
+    // (omitted for brevity in replace_file_content but this tool handles full replacement within range)
     const startTime = Date.now();
     const withSystem = prependSystemPrompt(messages);
 
     if (overrides?.provider === 'ollama') {
       try {
         const ollama = getOllamaProvider();
-        const content = await ollama.sendMessage(withSystem, { model: overrides.model });
-        return { content, provider: 'ollama', executionTime: Date.now() - startTime };
+        const model = overrides.model;
+        const content = await ollama.sendMessage(withSystem, { model });
+        return { content, provider: 'ollama', model, executionTime: Date.now() - startTime };
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Unknown error';
         return {
@@ -50,8 +54,9 @@ export class ProviderManager {
             executionTime: Date.now() - startTime,
           };
         }
-        const content = await openai.sendMessage(withSystem, { model: overrides.model });
-        return { content, provider: 'openai', executionTime: Date.now() - startTime };
+        const model = overrides.model;
+        const content = await openai.sendMessage(withSystem, { model });
+        return { content, provider: 'openai', model, executionTime: Date.now() - startTime };
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Unknown error';
         return {
@@ -72,8 +77,9 @@ export class ProviderManager {
             executionTime: Date.now() - startTime,
           };
         }
-        const content = await gemini.sendMessage(withSystem, { model: overrides.model });
-        return { content, provider: 'gemini', executionTime: Date.now() - startTime };
+        const model = overrides.model;
+        const content = await gemini.sendMessage(withSystem, { model });
+        return { content, provider: 'gemini', model, executionTime: Date.now() - startTime };
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Unknown error';
         return {
@@ -87,8 +93,9 @@ export class ProviderManager {
     try {
       const ollama = getOllamaProvider();
       if (await ollama.isAvailable()) {
-        const content = await ollama.sendMessage(withSystem, { model: overrides?.model });
-        return { content, provider: 'ollama', executionTime: Date.now() - startTime };
+        const model = overrides?.model;
+        const content = await ollama.sendMessage(withSystem, { model });
+        return { content, provider: 'ollama', model, executionTime: Date.now() - startTime };
       }
     } catch {
       // fallback
@@ -97,8 +104,9 @@ export class ProviderManager {
     try {
       const openai = getOpenAIProvider();
       if (openai.isConfigured() && (await openai.isAvailable())) {
-        const content = await openai.sendMessage(withSystem, { model: overrides?.model });
-        return { content, provider: 'openai', executionTime: Date.now() - startTime };
+        const model = overrides?.model;
+        const content = await openai.sendMessage(withSystem, { model });
+        return { content, provider: 'openai', model, executionTime: Date.now() - startTime };
       }
     } catch {
       // fallback
@@ -107,8 +115,9 @@ export class ProviderManager {
     try {
       const gemini = getGeminiProvider();
       if (gemini.isConfigured() && (await gemini.isAvailable())) {
-        const content = await gemini.sendMessage(withSystem, { model: overrides?.model });
-        return { content, provider: 'gemini', executionTime: Date.now() - startTime };
+        const model = overrides?.model;
+        const content = await gemini.sendMessage(withSystem, { model });
+        return { content, provider: 'gemini', model, executionTime: Date.now() - startTime };
       }
     } catch {
       // fallback
@@ -121,6 +130,54 @@ export class ProviderManager {
       provider: 'manual',
       executionTime: Date.now() - startTime,
     };
+  }
+
+  /**
+   * Stream message from managed providers
+   */
+  async *streamMessage(
+    messages: OllamaMessage[],
+    overrides?: ProviderOverrides
+  ): AsyncGenerator<{ content: string; provider: ManagedProvider }> {
+    const withSystem = prependSystemPrompt(messages);
+    const providerKey = overrides?.provider;
+
+    if (providerKey === 'ollama') {
+      const ollama = getOllamaProvider();
+      for await (const chunk of ollama.streamChat(withSystem, { model: overrides.model })) {
+        yield { content: chunk, provider: 'ollama' };
+      }
+      return;
+    }
+
+    if (providerKey === 'gemini') {
+      const gemini = getGeminiProvider();
+      for await (const chunk of gemini.streamChat(withSystem, { model: overrides.model })) {
+        yield { content: chunk, provider: 'gemini' };
+      }
+      return;
+    }
+
+    // Default: try Ollama then Gemini
+    try {
+      const ollama = getOllamaProvider();
+      if (await ollama.isAvailable()) {
+        for await (const chunk of ollama.streamChat(withSystem, { model: overrides?.model })) {
+          yield { content: chunk, provider: 'ollama' };
+        }
+        return;
+      }
+    } catch {}
+
+    const gemini = getGeminiProvider();
+    if (gemini.isConfigured() && (await gemini.isAvailable())) {
+      for await (const chunk of gemini.streamChat(withSystem, { model: overrides?.model })) {
+        yield { content: chunk, provider: 'gemini' };
+      }
+      return;
+    }
+
+    yield { content: 'No streaming provider available.', provider: 'manual' };
   }
 }
 

@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, Zap, Clock, Settings, FileText, Shield, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Zap, Clock, Settings, FileText, Shield, LogOut, Boxes } from 'lucide-react';
 
 const navigationItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Users', href: '/admin/users', icon: Users },
   { name: 'Agents', href: '/admin/agents', icon: Zap },
+  { name: 'Models', href: '/admin/models', icon: Boxes },
   { name: 'Sessions', href: '/admin/sessions', icon: Clock },
   { name: 'Tools', href: '/admin/tools', icon: Settings },
   { name: 'Governance', href: '/admin/governance', icon: Shield },

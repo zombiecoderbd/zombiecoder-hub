@@ -96,7 +96,7 @@ async function main() {
 
   console.log('[test] tool-result:', JSON.stringify(toolResult, null, 2));
 
-  await sleep(250);
+  await sleep(25);
   socket.disconnect();
 
   console.log('[test] done');

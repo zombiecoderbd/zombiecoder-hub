@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZombieCoder Hub - সমস্যা তালিকা ও সমাধান পরিকল্পনা</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --muted: #8b949e;
+      --heading: #f0f6fc;
+      --red: #f85149;
+      --orange: #d29922;
+      --green: #3fb950;
+      --blue: #58a6ff;
+      --purple: #bc8cff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI','Noto Sans Bengali',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
+    .container { max-width:1100px; margin:0 auto; padding:20px; }
+    header { background:linear-gradient(135deg,#1a1e2e,#0d1117); border-bottom:1px solid var(--border); padding:30px 20px; text-align:center; }
+    header h1 { font-size:24px; color:var(--heading); }
+    header p { color:var(--muted); font-size:13px; margin-top:6px; }
+    .problem { background:var(--card); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+    .problem-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+    .problem-num { background:var(--red); color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; flex-shrink:0; }
+    .problem-title { color:var(--heading); font-size:16px; font-weight:600; }
+    .problem-body { padding:20px; }
+    .row { display:grid; grid-template-columns:140px 1fr; gap:0; margin-bottom:0; border-bottom:1px solid rgba(48,54,61,0.5); }
+    .row:last-child { border-bottom:none; }
+    .row-label { padding:12px 16px; background:rgba(22,27,34,0.8); color:var(--muted); font-size:13px; font-weight:600; border-right:1px solid rgba(48,54,61,0.5); }
+    .row-value { padding:12px 16px; font-size:13px; }
+    .code { font-family:'Consolas',monospace; background:#0d1117; border:1px solid var(--border); border-radius:4px; padding:10px; font-size:12px; overflow-x:auto; margin:6px 0; white-space:pre-wrap; }
+    .file { font-family:'Consolas',monospace; background:rgba(57,211,83,0.1); padding:1px 6px; border-radius:3px; font-size:12px; color:var(--green); }
+    .confidence-bar { height:8px; border-radius:4px; background:rgba(255,255,255,0.1); margin-top:6px; position:relative; overflow:hidden; }
+    .confidence-fill { height:100%; border-radius:4px; }
+    .conf-high { background:var(--green); }
+    .conf-mid { background:var(--orange); }
+    .conf-low { background:var(--red); }
+    .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; }
+    .b-critical { background:rgba(248,81,73,0.15); color:var(--red); border:1px solid var(--red); }
+    .b-warning { background:rgba(210,153,34,0.15); color:var(--orange); border:1px solid var(--orange); }
+    .b-info { background:rgba(88,166,255,0.15); color:var(--blue); border:1px solid var(--blue); }
+    .commitment { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:24px; margin:30px 0; }
+    .commitment h2 { color:var(--heading); font-size:20px; margin-bottom:16px; border-bottom:2px solid var(--blue); padding-bottom:10px; }
+    .commitment p { font-size:14px; margin-bottom:10px; }
+    .accountability { background:rgba(248,81,73,0.08); border:1px solid var(--red); border-radius:8px; padding:24px; margin:30px 0; }
+    .accountability h2 { color:var(--red); font-size:18px; margin-bottom:12px; }
+    .accountability p { font-size:14px; margin-bottom:8px; }
+    .summary-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+    .summary-table th, .summary-table td { padding:10px 14px; border:1px solid var(--border); text-align:left; }
+    .summary-table th { background:rgba(22,27,34,0.8); color:var(--heading); font-weight:600; }
+    footer { text-align:center; padding:20px; color:var(--muted); font-size:11px; border-top:1px solid var(--border); margin-top:30px; }
+    @media(max-width:600px) { .row { grid-template-columns:1fr; } .row-label { border-right:none; border-bottom:1px solid rgba(48,54,61,0.5); } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ZombieCoder Hub v2.0 - সমস্যা তালিকা ও সমাধান পরিকল্পনা</h1>
+  <p>Admin Panel ব্যতীত সকল চিহ্নিত সমস্যা | প্রতিটির জন্য: সমস্যা, সমাধান, প্রত্যাশিত আউটপুট, আত্মবিশ্বাসের মাত্রা</p>
+  <p style="color:var(--blue); margin-top:4px;">তারিখ: ১৩ এপ্রিল ২০২৬</p>
+</header>
+
+<div class="container">
+
+<!-- ============================================ -->
+<!-- PROBLEM 1 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">1</div>
+    <div class="problem-title">Prisma Schema - Task model-এ 'result' field অনুপস্থিত <span class="badge b-critical">CRITICAL</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/agent/core.ts</span> Line 175-এ <code>result: agentResponse.message</code> লিখে Task তৈরি করা হচ্ছে। কিন্তু <span class="file">prisma/schema.prisma</span>-এর Task model-এ <code>result</code> নামে কোনো field নেই। AgentCore.processInteraction() কল হলে Prisma runtime error দেবে: <code>Unknown arg 'result' in data.result</code>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        prisma/schema.prisma-র Task model-এ <code>result String? @db.Text</code> field যোগ করা। তারপর <code>npx prisma migrate dev --name add-task-result</code> চালানো।
+        <div class="code">model Task {
+  ...
+  result        String?   @db.Text   // &lt;-- এটি যোগ হবে
+  ...
+}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        Migration সফল হবে। <code>tasks</code> টেবিলে <code>result</code> column যোগ হবে (nullable TEXT)। core.ts-এর processInteraction() আর crash করবে না।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - এটি একটি Prisma schema change, কোনো ambiguity নেই।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 2 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">2</div>
+    <div class="problem-title">Prisma Schema - AgentMemory model-এ 'sessionId' field অনুপস্থিত <span class="badge b-critical">CRITICAL</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/agent/memory.ts</span> Line 155-160-তে <code>sessionId: entry.sessionId</code> দিয়ে AgentMemory তৈরি করা হচ্ছে। কিন্তু schema-র AgentMemory model-এ sessionId field নেই। <code>storeMemory()</code> কল হলে Prisma error: <code>Unknown arg 'sessionId'</code>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        prisma/schema.prisma-র AgentMemory model-এ <code>sessionId String?</code> field এবং index যোগ করা। Migration চালানো।
+        <div class="code">model AgentMemory {
+  ...
+  sessionId     String?        // &lt;-- এটি যোগ হবে
+  ...
+  @@index([sessionId])         // &lt;-- এটি যোগ হবে
+}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        Migration সফল হবে। <code>agent_memory</code> টেবিলে <code>sessionId</code> column যোগ হবে। memory.ts-এর storeMemory() ও retrieveRelevantMemories() কার্যকর হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - সরাসরি schema field addition।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 3 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">3</div>
+    <div class="problem-title">next.config.mjs - ignoreBuildErrors: true <span class="badge b-critical">CRITICAL</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">next.config.mjs</span> Line 3-4: <code>ignoreBuildErrors: true</code> সেট করা আছে। এটি মানে Production build-এও TypeScript type errors সম্পূর্ণ ignore হবে। উপরের BUG-2, BUG-3 (missing fields) এর মতো সমস্যা build time-এ ধরা পড়বে না, runtime-এ crash হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        <code>ignoreBuildErrors: true</code> সরানো। তবে এটি সরানোর আগে schema fix (Problem 1, 2) এবং Prisma generate করতে হবে, নাহলে build fail করবে। সমাধান sequence: Schema fix -> prisma generate -> ignoreBuildErrors মুছা।
+        <div class="code">// next.config.mjs - পরিবর্তন
+const nextConfig = {
+  // typescript: { ignoreBuildErrors: true },  &lt;-- মুছে ফেলা হবে
+  allowedDevOrigins: [...],
+  ...
+};</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        <code>next build</code> চালালে TypeScript errors দেখাবে (যদি থাকে)। আমি সব type error ঠিক করে build pass করাবো। Build সফল হলে production code type-safe হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>90%</strong> - Config সরানো সহজ। তবে সরানোর পর কতগুলো hidden type error বের হবে সেটি অজানা। সেগুলোও ঠিক করব, কিন্তু সংখ্যা অনিশ্চিত।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:90%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 4 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">4</div>
+    <div class="problem-title">WebSocket সার্ভার demo AgentCore ব্যবহার করে (echo response) <span class="badge b-critical">CRITICAL</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/mcp/websocket.ts</span> Line 128-134: <code>handleSendMessage()</code> method <code>AgentCore.processInteraction()</code> কল করে, যেটি <span class="file">src/lib/agent/core.ts</span> Line 210-225-এ echo response দেয়: <code>"I received your message..."</code>। কোনো LLM কল হয় না।
+        <br><br>
+        অথচ HTTP API <span class="file">app/api/agent/chat/route.ts</span> <code>AgentExecutor</code> ব্যবহার করে যেটি Ollama/OpenAI/Gemini-তে আসল call করে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        websocket.ts-এর <code>handleSendMessage()</code>-এ AgentCore.processInteraction()-এর বদলে AgentExecutor ব্যবহার করা। ProviderManager-এর মাধ্যমে real LLM call হবে।
+        <div class="code">// websocket.ts handleSendMessage - পরিবর্তন
+import { getAgentExecutor } from '../agent/executor';
+
+// পুরনো (demo):
+// const agentCore = getAgentCore();
+// const response = await agentCore.processInteraction({...});
+
+// নতুন (real):
+const executor = getAgentExecutor(sessionId, userId);
+const history = await executor.getHistory(5);
+history.push({ role: 'user', content: message });
+const response = await executor.execute(history);
+await executor.storeMessage('assistant', response.content);</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        WebSocket দিয়ে message পাঠালে echo-র বদলে Ollama/OpenAI/Gemini থেকে actual AI response আসবে। HTTP API ও WebSocket দুটোই একই provider chain ব্যবহার করবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>95%</strong> - AgentExecutor কোড আগে থেকেই কার্যকর (HTTP API-তে চলছে)। WebSocket-এ শুধু import path পরিবর্তন। 5% ঝুঁকি: WebSocket process আলাদা (Port 3003), Prisma client connection সেখানে কাজ করে কিনা verify করতে হবে।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:95%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 5 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">5</div>
+    <div class="problem-title">WebSocket Auth - userId ownership check নেই <span class="badge b-critical">CRITICAL</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/mcp/websocket.ts</span> Line 242-250: <code>validateToken()</code> শুধু token valid কিনা দেখে (<code>return !!payload</code>)। Token থেকে userId extract করে session-এর userId-এর সঙ্গে match করে না। একজন authenticated user অন্যের session-এ join করতে পারে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        validateToken()-কে পরিবর্তন করে userId return করানো, তারপর handleJoinSession()-এ session ownership verify করা।
+        <div class="code">// validateToken পরিবর্তন - userId return করবে
+private async validateToken(token: string): Promise&lt;string | null&gt; {
+  try {
+    const { verifyJWT } = await import('../auth/service');
+    const payload = await verifyJWT(token);
+    return payload?.userId || null;
+  } catch {
+    return null;
+  }
+}
+
+// handleJoinSession-এ ownership check
+const tokenUserId = await this.validateToken(data.token);
+if (!tokenUserId || tokenUserId !== data.userId) {
+  socket.emit('error', { message: 'Auth mismatch' });
+  socket.disconnect();
+  return;
+}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        ভুল userId দিয়ে session join attempt করলে disconnect হবে। শুধু session owner তার নিজের session-এ যোগ দিতে পারবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - সরাসরি logic change, verifyJWT()-এর output structure আগে থেকেই জানা।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 6 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">6</div>
+    <div class="problem-title">Duplicate Singleton - AgentCore দুই জায়গায় <span class="badge b-warning">WARNING</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <code>getAgentCore()</code> export হচ্ছে দুই জায়গা থেকে:
+        <br>1. <span class="file">src/lib/agent/core.ts</span> Line 349-356
+        <br>2. <span class="file">src/lib/mcp/agent-singleton.ts</span> Line 10-15
+        <br>দুটি আলাদা variable (<code>agentCoreInstance</code>) - import source অনুযায়ী ভিন্ন instance তৈরি হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        core.ts থেকে singleton export সরানো। শুধু agent-singleton.ts রাখা। websocket.ts আগে থেকেই agent-singleton.ts import করে, তাই শুধু core.ts-এর Line 345-356 মুছতে হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        একটি মাত্র AgentCore instance থাকবে। State confusion সম্ভাবনা শূন্য।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - Code deletion, কোনো নতুন logic নেই।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 7 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">7</div>
+    <div class="problem-title">Dead Code - provider.ts (318 lines) <span class="badge b-warning">WARNING</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/agent/provider.ts</span> (318 lines, 8.7KB) কেউ import করে না। এতে পুরনো OllamaProvider, OpenAIProvider, ProviderManager class আছে। Actual system ব্যবহার করে <span class="file">provider-manager.ts</span> ও <span class="file">providers/*.ts</span>। এই ফাইলটি confusion তৈরি করে - কোনটি real, কোনটি purnano বুঝতে সময় লাগে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        ফাইলটি delete করা। কোনো কোড এটি import করে না, তাই delete করলে কিছু ভাঙবে না।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        318 lines dead code সরিয়ে ফেলা হবে। Codebase পরিষ্কার হবে। কোনো functional change হবে না।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - grep দিয়ে confirm করা হয়েছে কেউ import করে না।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 8 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">8</div>
+    <div class="problem-title">Gemini Provider - logUsage() DB-তে লেখে না <span class="badge b-warning">WARNING</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">src/lib/agent/providers/gemini.ts</span> Line 162-178: <code>logUsage()</code> শুধু <code>console.log()</code> করে। Ollama ও OpenAI provider-এর logUsage() DB-তে auditLog তৈরি করে। Gemini ব্যবহার হলে audit trail অসম্পূর্ণ থাকবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        Gemini-এর logUsage()-তে Ollama/OpenAI-এর মতো DB audit log যোগ করা:
+        <div class="code">async logUsage(sessionId, userId, input, output, tokensUsed): Promise&lt;void&gt; {
+  try {
+    const db = getDbClient();
+    await db.auditLog.create({
+      data: {
+        user: { connect: { id: userId } },
+        action: 'AI_GENERATION',
+        resource: 'gemini',
+        details: JSON.stringify({
+          sessionId, model: this.model,
+          inputLength: input.length,
+          outputLength: output.length,
+          tokensUsed: tokensUsed || 0,
+        }),
+      },
+    });
+  } catch (err) {
+    console.error('[Gemini] Failed to log usage:', err);
+  }
+}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        Gemini ব্যবহার হলেও audit_logs টেবিলে entry তৈরি হবে। তিনটি provider-ই consistent audit trail রাখবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - Ollama/OpenAI-এর কোড হুবহু copy করে adapt করা। Pattern প্রমাণিত।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 9 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">9</div>
+    <div class="problem-title">identity.json ও Prisma schema-তে ভুল তথ্য <span class="badge b-warning">WARNING</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        identity.json বলছে <code>"database": "SQLite with Prisma ORM"</code> (Line 32)। Prisma schema comment বলছে "Removed for SQLite compatibility" (Line 14)। কিন্তু বাস্তবে <code>provider = "mysql"</code> (schema Line 9) এবং DATABASE_URL MySQL connection string (.env.local Line 29)।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        identity.json-এ <code>"database": "MySQL with Prisma ORM"</code> করা। Prisma schema-র comment আপডেট করে "MySQL" লেখা। Enum ব্যবহার করা যায় MySQL-এ কিন্তু সেটি বড় refactor - শুধু comment ও metadata fix করব।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        Documentation codebase-এর বাস্তব অবস্থা প্রতিফলিত করবে। কোনো functional change নেই।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - Text edit।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 10 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">10</div>
+    <div class="problem-title">Duplicate Files - globals.css, hooks <span class="badge b-info">INFO</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        3 সেট duplicate file:
+        <br>1. <span class="file">app/globals.css</span> = <span class="file">styles/globals.css</span> (4353 bytes)
+        <br>2. <span class="file">hooks/use-mobile.ts</span> = <span class="file">components/ui/use-mobile.tsx</span> (565 bytes)
+        <br>3. <span class="file">hooks/use-toast.ts</span> = <span class="file">components/ui/use-toast.ts</span> (3945 bytes)
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        styles/globals.css মুছে ফেলা (app/globals.css ব্যবহৃত হচ্ছে layout.tsx-এ)। hooks/ ফোল্ডারের ফাইল মুছে ফেলা (components/ui/ version import হচ্ছে Shadcn components থেকে)। Import path verify করে তারপর delete।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        3টি duplicate file সরানো হবে। Import error হলে অবিলম্বে import path ঠিক করা হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>95%</strong> - কোনো hidden import না থাকলে 100%। grep দিয়ে verify করব।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:95%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 11 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">11</div>
+    <div class="problem-title">Vercel Analytics - "No Cloud Dependencies" দাবির সঙ্গে সাংঘর্ষিক <span class="badge b-warning">WARNING</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">app/layout.tsx</span> Line 3, 41: <code>@vercel/analytics</code> import ও <code>&lt;Analytics /&gt;</code> render করা হচ্ছে। identity.json বলছে <code>"data_privacy": "On-Device Processing, No Cloud Dependencies"</code>। Vercel Analytics third-party cloud service যা user data collect করে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        layout.tsx থেকে @vercel/analytics import ও &lt;Analytics /&gt; component সরানো। "Local-first" দাবি বজায় রাখতে হলে third-party tracking থাকা উচিত না।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        Vercel-এ কোনো analytics data পাঠানো হবে না। identity.json-এর "No Cloud Dependencies" দাবি সত্য হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>100%</strong> - দুই লাইন মুছে ফেলা।
+        <div class="confidence-bar"><div class="confidence-fill conf-high" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROBLEM 12 -->
+<!-- ============================================ -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">12</div>
+    <div class="problem-title">socket.io-client installed কিন্তু ব্যবহৃত হচ্ছে না <span class="badge b-info">INFO</span></div>
+  </div>
+  <div class="problem-body">
+    <div class="row">
+      <div class="row-label">সমস্যা</div>
+      <div class="row-value">
+        <span class="file">package.json</span> Line 70: <code>"socket.io-client": "^4.8.3"</code> dependency আছে কিন্তু পুরো codebase-এ কোনো React component এটি import করে না। Dead dependency।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">সমাধান</div>
+      <div class="row-value">
+        দুটি option: (a) যদি WebSocket client-side feature ভবিষ্যতে লাগবে তাহলে রেখে দেওয়া। (b) যদি না লাগে তাহলে <code>npm uninstall socket.io-client</code>। আমি রেখে দেওয়ার পক্ষে - কারণ Problem 4 fix করলে client-side code লেখার সময় লাগবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আউটপুট</div>
+      <div class="row-value">
+        কোনো পরিবর্তন করব না। Remark হিসেবে note রাখা হবে।
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-label">আত্মবিশ্বাস</div>
+      <div class="row-value">
+        <strong>N/A</strong> - Action required নয়।
+        <div class="confidence-bar"><div class="confidence-fill conf-mid" style="width:50%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- COMMITMENT SECTION -->
+<!-- ============================================ -->
+<div class="commitment">
+  <h2>আমি কি দিব আউটপুট হিসেবে</h2>
+
+  <p>উপরের 11টি actionable সমস্যার (Problem 12 ব্যতীত) সমাধান করলে নিচের ফাইলগুলো পরিবর্তিত হবে:</p>
+
+  <table class="summary-table">
+    <tr>
+      <th>#</th>
+      <th>ফাইল</th>
+      <th>পরিবর্তন</th>
+      <th>আত্মবিশ্বাস</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><span class="file">prisma/schema.prisma</span></td>
+      <td>Task.result ও AgentMemory.sessionId field যোগ, comment update</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="file">next.config.mjs</span></td>
+      <td>ignoreBuildErrors: true সরানো</td>
+      <td style="color:var(--green);">90%</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><span class="file">src/lib/mcp/websocket.ts</span></td>
+      <td>AgentExecutor ব্যবহার, auth ownership check</td>
+      <td style="color:var(--green);">95%</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><span class="file">src/lib/agent/core.ts</span></td>
+      <td>Duplicate singleton export সরানো</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><span class="file">src/lib/agent/provider.ts</span></td>
+      <td>ফাইল delete (dead code)</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><span class="file">src/lib/agent/providers/gemini.ts</span></td>
+      <td>logUsage() DB audit logging যোগ</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><span class="file">identity.json</span></td>
+      <td>"SQLite" -> "MySQL" update</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><span class="file">styles/globals.css</span></td>
+      <td>Delete (duplicate)</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><span class="file">hooks/use-mobile.ts, hooks/use-toast.ts</span></td>
+      <td>Delete (duplicate)</td>
+      <td style="color:var(--green);">95%</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><span class="file">app/layout.tsx</span></td>
+      <td>Vercel Analytics সরানো</td>
+      <td style="color:var(--green);">100%</td>
+    </tr>
+  </table>
+
+  <p style="margin-top:16px;"><strong>প্রত্যাশিত চূড়ান্ত আউটপুট (কাজ শেষে):</strong></p>
+  <ul style="padding-left:20px; font-size:14px;">
+    <li>Prisma migration সফলভাবে চলবে (task.result, agent_memory.sessionId column যোগ হবে)</li>
+    <li><code>npx prisma generate</code> error-free হবে</li>
+    <li>WebSocket সার্ভার actual AI response দেবে (Ollama/OpenAI/Gemini), echo নয়</li>
+    <li>WebSocket auth session ownership verify করবে</li>
+    <li>Dead code ও duplicate files সরানো হবে</li>
+    <li>identity.json ও schema comments codebase-এর বাস্তব অবস্থা দেখাবে</li>
+    <li>Gemini audit trail complete হবে</li>
+    <li>Third-party tracking (Vercel Analytics) সরানো হবে</li>
+    <li><strong>Verification:</strong> <code>next build</code> pass করলে (TypeScript error-free) এটিই প্রমাণ যে fix সঠিকভাবে হয়েছে</li>
+  </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- ACCOUNTABILITY SECTION -->
+<!-- ============================================ -->
+<div class="accountability">
+  <h2>যদি কথা ও কাজের মিল না থাকে</h2>
+
+  <p>এই ডকুমেন্টটি একটি <strong>লিখিত প্রতিশ্রুতি</strong>। এখানে প্রতিটি সমস্যার জন্য:</p>
+  <ul style="padding-left:20px; font-size:14px; margin-bottom:12px;">
+    <li>সমস্যা কোথায় (exact file, exact line)</li>
+    <li>সমাধান কি (exact code change)</li>
+    <li>আউটপুট কি আসবে (exact expected result)</li>
+    <li>আমি কতটুকু confident (percentage)</li>
+  </ul>
+
+  <p>তিনটি সম্ভাবনা:</p>
+
+  <table class="summary-table">
+    <tr><th>পরিস্থিতি</th><th>চিহ্নিতকরণ</th></tr>
+    <tr>
+      <td>কাজ সম্পূর্ণ হয়, সব fix কার্যকর, build pass করে</td>
+      <td style="color:var(--green);"><strong>Audit Verified</strong> - রিপোর্ট ও execution মিলেছে</td>
+    </tr>
+    <tr>
+      <td>কিছু fix কাজ করে, কিছু করে না (genuine technical obstacle)</td>
+      <td style="color:var(--orange);"><strong>Partial Delivery</strong> - কোনটি ব্যর্থ হলো এবং কেন সেটি transparently জানাবো। এটি গ্রহণযোগ্য যদি ব্যর্থতার কারণ যুক্তিসঙ্গত হয়।</td>
+    </tr>
+    <tr>
+      <td>অডিট রিপোর্টে বলেছি A সমস্যা, কিন্তু আসলে A সমস্যা নয়। অথবা বলেছি fix করব, কিন্তু ভিন্ন কিছু করেছি। অথবা "100% confident" বলে fail করেছি কিন্তু কারণ জানাইনি।</td>
+      <td style="color:var(--red);"><strong>Audit Bypass / False Report</strong> - বিশ্লেষণে মিথ্যা তথ্য দেওয়া হয়েছে অথবা প্রতিশ্রুতি পালন না করে ঢাকার চেষ্টা করা হয়েছে। এটি "কর্পোরেট দালালি" - corporate safety script দিয়ে আসল সমস্যা ঢাকা।</td>
+    </tr>
+  </table>
+
+  <p style="margin-top:16px;">প্রতিটি সমস্যা fix-এর পর <strong>verifiable প্রমাণ</strong> দেওয়া হবে:</p>
+  <ul style="padding-left:20px; font-size:14px;">
+    <li>Schema change -> migration command output</li>
+    <li>Code change -> file diff (আগে vs পরে)</li>
+    <li>Build fix -> <code>next build</code> output (pass/fail)</li>
+    <li>WebSocket fix -> test script output</li>
+  </ul>
+
+  <p style="margin-top:12px; color:var(--red);">যদি "100% confident" বলে কোনো item fail করে এবং গ্রহণযোগ্য কোনো কারণ উপস্থাপন না করতে পারি, সেটি <strong>"Audit Bypass"</strong> হিসেবে চিহ্নিত হবে। সেটিই সত্য।</p>
+</div>
+
+</div>
+
+<footer>
+  ফাইল: /home/sahon/zombiecoder hub/work/fix-plan.html | তৈরি: ১৩ এপ্রিল ২০২৬ | Local Code Analysis
+</footer>
+
+</body>
+</html>

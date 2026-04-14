@@ -1,0 +1,1614 @@
+[
+  {
+    "provider": "ollama",
+    "message": "তুমি কে? তোমার আর্কিটেকচার সম্পর্কে সংক্ষেপে বলো।",
+    "chunks": [
+      {
+        "content": "আ",
+        "timestamp": "2026-04-14T05:27:59.945Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:00.051Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:00.154Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:00.356Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:00.457Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:00.556Z"
+      },
+      {
+        "content": "্দ",
+        "timestamp": "2026-04-14T05:28:00.755Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:00.987Z"
+      },
+      {
+        "content": "িক",
+        "timestamp": "2026-04-14T05:28:01.201Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:01.409Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:01.523Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:01.636Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:01.742Z"
+      },
+      {
+        "content": " প",
+        "timestamp": "2026-04-14T05:28:01.944Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:02.136Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:02.367Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:02.473Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:02.693Z"
+      },
+      {
+        "content": "াম",
+        "timestamp": "2026-04-14T05:28:02.918Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:03.123Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:03.338Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:03.451Z"
+      },
+      {
+        "content": "ং",
+        "timestamp": "2026-04-14T05:28:03.671Z"
+      },
+      {
+        "content": " ড",
+        "timestamp": "2026-04-14T05:28:03.928Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:04.021Z"
+      },
+      {
+        "content": "ভ",
+        "timestamp": "2026-04-14T05:28:04.127Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:04.229Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:04.342Z"
+      },
+      {
+        "content": "প",
+        "timestamp": "2026-04-14T05:28:04.439Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:04.631Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:04.865Z"
+      },
+      {
+        "content": "াই",
+        "timestamp": "2026-04-14T05:28:05.069Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:05.161Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:05.351Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:05.446Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:05.631Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:05.823Z"
+      },
+      {
+        "content": "িন",
+        "timestamp": "2026-04-14T05:28:06.036Z"
+      },
+      {
+        "content": "্স",
+        "timestamp": "2026-04-14T05:28:06.224Z"
+      },
+      {
+        "content": " য",
+        "timestamp": "2026-04-14T05:28:06.437Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:06.544Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:06.633Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:06.745Z"
+      },
+      {
+        "content": " \"",
+        "timestamp": "2026-04-14T05:28:06.848Z"
+      },
+      {
+        "content": "Developer",
+        "timestamp": "2026-04-14T05:28:06.945Z"
+      },
+      {
+        "content": " Zone",
+        "timestamp": "2026-04-14T05:28:07.040Z"
+      },
+      {
+        "content": "\"",
+        "timestamp": "2026-04-14T05:28:07.138Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:07.317Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:07.413Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:07.596Z"
+      },
+      {
+        "content": "দ",
+        "timestamp": "2026-04-14T05:28:07.698Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:07.788Z"
+      },
+      {
+        "content": " ন",
+        "timestamp": "2026-04-14T05:28:07.999Z"
+      },
+      {
+        "content": "িয",
+        "timestamp": "2026-04-14T05:28:08.195Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:08.387Z"
+      },
+      {
+        "content": "о",
+        "timestamp": "2026-04-14T05:28:08.493Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:08.585Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:08.777Z"
+      },
+      {
+        "content": "াস",
+        "timestamp": "2026-04-14T05:28:08.966Z"
+      },
+      {
+        "content": "।",
+        "timestamp": "2026-04-14T05:28:09.057Z"
+      },
+      {
+        "content": " আ",
+        "timestamp": "2026-04-14T05:28:09.275Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:09.369Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:09.581Z"
+      },
+      {
+        "content": " আ",
+        "timestamp": "2026-04-14T05:28:09.767Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:09.859Z"
+      },
+      {
+        "content": "্ক",
+        "timestamp": "2026-04-14T05:28:10.058Z"
+      },
+      {
+        "content": "িট",
+        "timestamp": "2026-04-14T05:28:10.250Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:10.341Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:10.433Z"
+      },
+      {
+        "content": "চ",
+        "timestamp": "2026-04-14T05:28:10.561Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:10.764Z"
+      },
+      {
+        "content": " হ",
+        "timestamp": "2026-04-14T05:28:10.961Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:11.079Z"
+      },
+      {
+        "content": " জ",
+        "timestamp": "2026-04-14T05:28:11.270Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:11.381Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:11.579Z"
+      },
+      {
+        "content": " ব",
+        "timestamp": "2026-04-14T05:28:11.771Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:11.981Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:12.088Z"
+      },
+      {
+        "content": "হ",
+        "timestamp": "2026-04-14T05:28:12.211Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:12.416Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:12.642Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:12.744Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:12.847Z"
+      },
+      {
+        "content": " হ",
+        "timestamp": "2026-04-14T05:28:13.045Z"
+      },
+      {
+        "content": "ও",
+        "timestamp": "2026-04-14T05:28:13.146Z"
+      },
+      {
+        "content": "য",
+        "timestamp": "2026-04-14T05:28:13.249Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:13.448Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:13.549Z"
+      },
+      {
+        "content": " য",
+        "timestamp": "2026-04-14T05:28:13.767Z"
+      },
+      {
+        "content": "ায",
+        "timestamp": "2026-04-14T05:28:14.075Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:14.285Z"
+      },
+      {
+        "content": " ব",
+        "timestamp": "2026-04-14T05:28:14.487Z"
+      },
+      {
+        "content": "াং",
+        "timestamp": "2026-04-14T05:28:14.699Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:14.836Z"
+      },
+      {
+        "content": "াদ",
+        "timestamp": "2026-04-14T05:28:15.064Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:15.185Z"
+      },
+      {
+        "content": "শ",
+        "timestamp": "2026-04-14T05:28:15.333Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:15.442Z"
+      },
+      {
+        "content": " অ",
+        "timestamp": "2026-04-14T05:28:15.650Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:15.785Z"
+      },
+      {
+        "content": "স",
+        "timestamp": "2026-04-14T05:28:15.886Z"
+      },
+      {
+        "content": "্থ",
+        "timestamp": "2026-04-14T05:28:16.153Z"
+      },
+      {
+        "content": "িত",
+        "timestamp": "2026-04-14T05:28:16.356Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:16.564Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:16.677Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:16.809Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:16.951Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:17.179Z"
+      },
+      {
+        "content": "্থ",
+        "timestamp": "2026-04-14T05:28:17.398Z"
+      },
+      {
+        "content": "ায",
+        "timestamp": "2026-04-14T05:28:17.603Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:17.807Z"
+      },
+      {
+        "content": "ী",
+        "timestamp": "2026-04-14T05:28:18.009Z"
+      },
+      {
+        "content": ",",
+        "timestamp": "2026-04-14T05:28:18.112Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:18.311Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:18.419Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:18.627Z"
+      },
+      {
+        "content": "ূ",
+        "timestamp": "2026-04-14T05:28:18.839Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:18.961Z"
+      },
+      {
+        "content": "্ণ",
+        "timestamp": "2026-04-14T05:28:19.299Z"
+      },
+      {
+        "content": " ন",
+        "timestamp": "2026-04-14T05:28:19.506Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:19.617Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:19.766Z"
+      },
+      {
+        "content": "্ভ",
+        "timestamp": "2026-04-14T05:28:20.032Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:20.145Z"
+      },
+      {
+        "content": "য",
+        "timestamp": "2026-04-14T05:28:20.305Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:20.532Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:20.645Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:20.862Z"
+      },
+      {
+        "content": " ও",
+        "timestamp": "2026-04-14T05:28:21.100Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:21.314Z"
+      },
+      {
+        "content": "থ",
+        "timestamp": "2026-04-14T05:28:21.426Z"
+      },
+      {
+        "content": "িক",
+        "timestamp": "2026-04-14T05:28:21.660Z"
+      },
+      {
+        "content": "্স",
+        "timestamp": "2026-04-14T05:28:21.882Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:22.120Z"
+      },
+      {
+        "content": "াম",
+        "timestamp": "2026-04-14T05:28:22.418Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:22.548Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:22.768Z"
+      },
+      {
+        "content": "িক",
+        "timestamp": "2026-04-14T05:28:22.983Z"
+      },
+      {
+        "content": " প",
+        "timestamp": "2026-04-14T05:28:23.230Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:23.480Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:23.706Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:23.861Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:24.092Z"
+      },
+      {
+        "content": "াম",
+        "timestamp": "2026-04-14T05:28:24.329Z"
+      },
+      {
+        "content": "িং",
+        "timestamp": "2026-04-14T05:28:24.597Z"
+      },
+      {
+        "content": " ও",
+        "timestamp": "2026-04-14T05:28:24.839Z"
+      },
+      {
+        "content": " ড",
+        "timestamp": "2026-04-14T05:28:25.072Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:25.207Z"
+      },
+      {
+        "content": "ভ",
+        "timestamp": "2026-04-14T05:28:25.321Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:25.432Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:25.554Z"
+      },
+      {
+        "content": "প",
+        "timestamp": "2026-04-14T05:28:25.695Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:25.807Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:25.926Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:26.057Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:28:26.267Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:26.482Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:26.606Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:26.836Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:26.944Z"
+      },
+      {
+        "content": "্ক",
+        "timestamp": "2026-04-14T05:28:27.200Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:27.311Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:27.526Z"
+      },
+      {
+        "content": "াজ",
+        "timestamp": "2026-04-14T05:28:27.743Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:27.981Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:28.093Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:28.209Z"
+      },
+      {
+        "content": " থ",
+        "timestamp": "2026-04-14T05:28:28.463Z"
+      },
+      {
+        "content": "াক",
+        "timestamp": "2026-04-14T05:28:28.680Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:28.791Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:29.015Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:29.130Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:29.263Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:29.382Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:29.609Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:29.729Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:29.949Z"
+      },
+      {
+        "content": "িউ",
+        "timestamp": "2026-04-14T05:28:30.162Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:30.284Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:30.527Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:30.739Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:30.851Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:28:31.078Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:31.226Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:31.337Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:28:31.573Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:31.802Z"
+      },
+      {
+        "content": "াই",
+        "timestamp": "2026-04-14T05:28:32.037Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:32.153Z"
+      },
+      {
+        "content": "।",
+        "timestamp": "2026-04-14T05:28:32.273Z"
+      },
+      {
+        "content": " আ",
+        "timestamp": "2026-04-14T05:28:32.491Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:32.603Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:32.833Z"
+      },
+      {
+        "content": " আ",
+        "timestamp": "2026-04-14T05:28:33.082Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:33.212Z"
+      },
+      {
+        "content": "্ক",
+        "timestamp": "2026-04-14T05:28:33.426Z"
+      },
+      {
+        "content": "িট",
+        "timestamp": "2026-04-14T05:28:33.658Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:33.779Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:33.897Z"
+      },
+      {
+        "content": "চ",
+        "timestamp": "2026-04-14T05:28:34.013Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:34.233Z"
+      },
+      {
+        "content": " হ",
+        "timestamp": "2026-04-14T05:28:34.460Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:34.581Z"
+      },
+      {
+        "content": " ব",
+        "timestamp": "2026-04-14T05:28:34.813Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:35.039Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:35.152Z"
+      },
+      {
+        "content": "হ",
+        "timestamp": "2026-04-14T05:28:35.268Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:35.519Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:35.632Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:36.009Z"
+      },
+      {
+        "content": "ী",
+        "timestamp": "2026-04-14T05:28:36.252Z"
+      },
+      {
+        "content": "দ",
+        "timestamp": "2026-04-14T05:28:36.365Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:36.503Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:36.652Z"
+      },
+      {
+        "content": " জ",
+        "timestamp": "2026-04-14T05:28:36.886Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:28:36.998Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:37.222Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:37.445Z"
+      },
+      {
+        "content": "ু",
+        "timestamp": "2026-04-14T05:28:37.669Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:37.787Z"
+      },
+      {
+        "content": "িধ",
+        "timestamp": "2026-04-14T05:28:38.017Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:38.260Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:38.483Z"
+      },
+      {
+        "content": "ৃ",
+        "timestamp": "2026-04-14T05:28:38.742Z"
+      },
+      {
+        "content": "ষ",
+        "timestamp": "2026-04-14T05:28:38.855Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:28:39.083Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:39.216Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:39.438Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:39.566Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:39.701Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:39.945Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:40.067Z"
+      },
+      {
+        "content": "ং",
+        "timestamp": "2026-04-14T05:28:40.297Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:40.523Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:40.645Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:40.902Z"
+      },
+      {
+        "content": "ূ",
+        "timestamp": "2026-04-14T05:28:41.157Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:41.275Z"
+      },
+      {
+        "content": "্ণ",
+        "timestamp": "2026-04-14T05:28:41.527Z"
+      },
+      {
+        "content": " ব",
+        "timestamp": "2026-04-14T05:28:41.767Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:41.988Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:42.108Z"
+      },
+      {
+        "content": "হ",
+        "timestamp": "2026-04-14T05:28:42.222Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:28:42.448Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:42.698Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:42.827Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:42.944Z"
+      },
+      {
+        "content": " হ",
+        "timestamp": "2026-04-14T05:28:43.208Z"
+      },
+      {
+        "content": "ও",
+        "timestamp": "2026-04-14T05:28:43.329Z"
+      },
+      {
+        "content": "য",
+        "timestamp": "2026-04-14T05:28:43.448Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:43.692Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:43.807Z"
+      },
+      {
+        "content": " য",
+        "timestamp": "2026-04-14T05:28:44.041Z"
+      },
+      {
+        "content": "ায",
+        "timestamp": "2026-04-14T05:28:44.266Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:44.504Z"
+      },
+      {
+        "content": " ব",
+        "timestamp": "2026-04-14T05:28:44.737Z"
+      },
+      {
+        "content": "াং",
+        "timestamp": "2026-04-14T05:28:44.967Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:28:45.083Z"
+      },
+      {
+        "content": "াদ",
+        "timestamp": "2026-04-14T05:28:45.321Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:45.440Z"
+      },
+      {
+        "content": "শ",
+        "timestamp": "2026-04-14T05:28:45.558Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:45.676Z"
+      },
+      {
+        "content": " অ",
+        "timestamp": "2026-04-14T05:28:45.922Z"
+      },
+      {
+        "content": "ব",
+        "timestamp": "2026-04-14T05:28:46.079Z"
+      },
+      {
+        "content": "স",
+        "timestamp": "2026-04-14T05:28:46.197Z"
+      },
+      {
+        "content": "্থ",
+        "timestamp": "2026-04-14T05:28:46.437Z"
+      },
+      {
+        "content": "িত",
+        "timestamp": "2026-04-14T05:28:46.683Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:46.971Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:47.110Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:47.256Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:47.403Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:47.639Z"
+      },
+      {
+        "content": "্থ",
+        "timestamp": "2026-04-14T05:28:47.896Z"
+      },
+      {
+        "content": "ায",
+        "timestamp": "2026-04-14T05:28:48.160Z"
+      },
+      {
+        "content": "়",
+        "timestamp": "2026-04-14T05:28:48.408Z"
+      },
+      {
+        "content": "ী",
+        "timestamp": "2026-04-14T05:28:48.652Z"
+      },
+      {
+        "content": " ও",
+        "timestamp": "2026-04-14T05:28:48.867Z"
+      },
+      {
+        "content": " ন",
+        "timestamp": "2026-04-14T05:28:49.107Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:49.228Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:49.344Z"
+      },
+      {
+        "content": "্ভ",
+        "timestamp": "2026-04-14T05:28:49.584Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:49.718Z"
+      },
+      {
+        "content": "য",
+        "timestamp": "2026-04-14T05:28:49.860Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:50.104Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:50.251Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:50.519Z"
+      },
+      {
+        "content": " প",
+        "timestamp": "2026-04-14T05:28:50.754Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:51.025Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:51.278Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:51.407Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:51.667Z"
+      },
+      {
+        "content": "াম",
+        "timestamp": "2026-04-14T05:28:51.922Z"
+      },
+      {
+        "content": "িং",
+        "timestamp": "2026-04-14T05:28:52.329Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:52.661Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:52.802Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:53.075Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:53.209Z"
+      },
+      {
+        "content": "্ক",
+        "timestamp": "2026-04-14T05:28:53.497Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:28:53.660Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:53.998Z"
+      },
+      {
+        "content": "াজ",
+        "timestamp": "2026-04-14T05:28:54.303Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:28:54.572Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:54.688Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:28:54.808Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:28:55.119Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:28:55.254Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:28:55.372Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:55.492Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:28:55.743Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:28:55.871Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:28:56.151Z"
+      },
+      {
+        "content": "ূ",
+        "timestamp": "2026-04-14T05:28:56.449Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:56.569Z"
+      },
+      {
+        "content": "্ণ",
+        "timestamp": "2026-04-14T05:28:56.798Z"
+      },
+      {
+        "content": " ন",
+        "timestamp": "2026-04-14T05:28:57.032Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:28:57.150Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:57.289Z"
+      },
+      {
+        "content": "্ভ",
+        "timestamp": "2026-04-14T05:28:57.645Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:28:57.807Z"
+      },
+      {
+        "content": "য",
+        "timestamp": "2026-04-14T05:28:57.946Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:58.226Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:58.394Z"
+      },
+      {
+        "content": "্য",
+        "timestamp": "2026-04-14T05:28:58.680Z"
+      },
+      {
+        "content": " প",
+        "timestamp": "2026-04-14T05:28:59.013Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:28:59.443Z"
+      },
+      {
+        "content": "ো",
+        "timestamp": "2026-04-14T05:28:59.823Z"
+      },
+      {
+        "content": "গ",
+        "timestamp": "2026-04-14T05:28:59.999Z"
+      },
+      {
+        "content": "্র",
+        "timestamp": "2026-04-14T05:29:00.303Z"
+      },
+      {
+        "content": "াম",
+        "timestamp": "2026-04-14T05:29:00.542Z"
+      },
+      {
+        "content": "িং",
+        "timestamp": "2026-04-14T05:29:00.806Z"
+      },
+      {
+        "content": " ও",
+        "timestamp": "2026-04-14T05:29:01.100Z"
+      },
+      {
+        "content": " ড",
+        "timestamp": "2026-04-14T05:29:01.425Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:01.593Z"
+      },
+      {
+        "content": "ভ",
+        "timestamp": "2026-04-14T05:29:01.751Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:01.910Z"
+      },
+      {
+        "content": "ল",
+        "timestamp": "2026-04-14T05:29:02.065Z"
+      },
+      {
+        "content": "প",
+        "timestamp": "2026-04-14T05:29:02.187Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:29:02.309Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:02.455Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:29:02.612Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:29:02.910Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:29:03.173Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:29:03.305Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:29:03.570Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:29:03.757Z"
+      },
+      {
+        "content": "্ক",
+        "timestamp": "2026-04-14T05:29:04.057Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:04.195Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:29:04.444Z"
+      },
+      {
+        "content": "াজ",
+        "timestamp": "2026-04-14T05:29:04.707Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:29:04.967Z"
+      },
+      {
+        "content": "র",
+        "timestamp": "2026-04-14T05:29:05.097Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:05.226Z"
+      },
+      {
+        "content": " থ",
+        "timestamp": "2026-04-14T05:29:05.539Z"
+      },
+      {
+        "content": "াক",
+        "timestamp": "2026-04-14T05:29:05.902Z"
+      },
+      {
+        "content": "া",
+        "timestamp": "2026-04-14T05:29:06.075Z"
+      },
+      {
+        "content": " এ",
+        "timestamp": "2026-04-14T05:29:06.367Z"
+      },
+      {
+        "content": "ক",
+        "timestamp": "2026-04-14T05:29:06.529Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:29:06.674Z"
+      },
+      {
+        "content": "ি",
+        "timestamp": "2026-04-14T05:29:06.836Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:29:07.120Z"
+      },
+      {
+        "content": "ম",
+        "timestamp": "2026-04-14T05:29:07.282Z"
+      },
+      {
+        "content": "্প",
+        "timestamp": "2026-04-14T05:29:07.703Z"
+      },
+      {
+        "content": "িউ",
+        "timestamp": "2026-04-14T05:29:07.982Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:29:08.126Z"
+      },
+      {
+        "content": "ার",
+        "timestamp": "2026-04-14T05:29:08.408Z"
+      },
+      {
+        "content": " ক",
+        "timestamp": "2026-04-14T05:29:08.669Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:29:08.802Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:29:09.074Z"
+      },
+      {
+        "content": "ে",
+        "timestamp": "2026-04-14T05:29:09.208Z"
+      },
+      {
+        "content": "ন",
+        "timestamp": "2026-04-14T05:29:09.343Z"
+      },
+      {
+        "content": "্ট",
+        "timestamp": "2026-04-14T05:29:09.615Z"
+      },
+      {
+        "content": " স",
+        "timestamp": "2026-04-14T05:29:09.870Z"
+      },
+      {
+        "content": "াই",
+        "timestamp": "2026-04-14T05:29:10.139Z"
+      },
+      {
+        "content": "ট",
+        "timestamp": "2026-04-14T05:29:10.260Z"
+      },
+      {
+        "content": "।",
+        "timestamp": "2026-04-14T05:29:10.391Z"
+      }
+    ],
+    "traceId": "FORENSIC-1776144436972-c6v",
+    "duration": 70621
+  },
+  {
+    "provider": "gemini",
+    "message": "Explain the benefits of local-first AI development.",
+    "chunks": [
+      {
+        "content": "As **ZombieCoder v2.0.0**, part of the **Developer Zone** mission, I am",
+        "timestamp": "2026-04-14T05:29:14.484Z"
+      },
+      {
+        "content": " built on the principle of providing locally-operating and ethically-driven assistance. Local-first AI development offers several critical advantages for",
+        "timestamp": "2026-04-14T05:29:14.489Z"
+      },
+      {
+        "content": " developers and organizations.\n\nHere are the primary benefits:\n\n### 1. Enhanced Privacy and Data Security\nThis is the most significant benefit.",
+        "timestamp": "2026-04-14T05:29:14.574Z"
+      },
+      {
+        "content": " In a local-first environment, your source code, proprietary algorithms, and sensitive data never leave your machine or local network. This eliminates",
+        "timestamp": "2026-04-14T05:29:14.738Z"
+      },
+      {
+        "content": " the risk of data leaks to third-party cloud providers and ensures compliance with strict data protection regulations (like GDPR or internal",
+        "timestamp": "2026-04-14T05:29:14.873Z"
+      },
+      {
+        "content": " corporate policies).\n\n### 2. Reduced Latency and High Performance\nLocal AI eliminates the \"round-trip\"",
+        "timestamp": "2026-04-14T05:29:14.987Z"
+      },
+      {
+        "content": " time required to send data to a cloud server and wait for a response.\n*   **Instant Feedback:** Code completions",
+        "timestamp": "2026-04-14T05:29:15.103Z"
+      },
+      {
+        "content": " and suggestions happen in real-time.\n*   **No Bandwidth Bottlenecks:** Large files or datasets can be processed without",
+        "timestamp": "2026-04-14T05:29:15.250Z"
+      },
+      {
+        "content": " being limited by internet upload speeds.\n\n### 3. Offline Reliability\nLocal-first AI does not require an active internet connection to",
+        "timestamp": "2026-04-14T05:29:15.395Z"
+      },
+      {
+        "content": " function.\n*   **Consistent Availability:** You can continue working in areas with poor connectivity, during ISP outages, or in",
+        "timestamp": "2026-04-14T05:29:15.544Z"
+      },
+      {
+        "content": " high-security \"air-gapped\" environments.\n*   **No Service Downtime:** You aren't affected",
+        "timestamp": "2026-04-14T05:29:15.673Z"
+      },
+      {
+        "content": " if a cloud provider's API goes down.\n\n### 4. Cost Efficiency\nWhile cloud AI services often charge per",
+        "timestamp": "2026-04-14T05:29:15.851Z"
+      },
+      {
+        "content": " token or via monthly subscriptions, local AI utilizes your existing hardware.\n*   **Zero Marginal Cost:** Once you have",
+        "timestamp": "2026-04-14T05:29:15.992Z"
+      },
+      {
+        "content": " the hardware, there are no additional fees for generating millions of lines of code.\n*   **Predictable Budgeting:** You avoid unexpected",
+        "timestamp": "2026-04-14T05:29:16.096Z"
+      },
+      {
+        "content": " billing spikes caused by high usage.\n\n### 5. Customization and Control\nLocal development allows you to fine-tune",
+        "timestamp": "2026-04-14T05:29:16.235Z"
+      },
+      {
+        "content": " models on your specific codebase or documentation without sharing that knowledge with the public.\n*   **Version Control:** You decide exactly which",
+        "timestamp": "2026-04-14T05:29:16.398Z"
+      },
+      {
+        "content": " version of a model to use, ensuring that updates to a cloud API don't suddenly break your workflow or change the",
+        "timestamp": "2026-04-14T05:29:16.532Z"
+      },
+      {
+        "content": " quality of output.\n*   **Hardware Optimization:** You can optimize the model to run specifically on your local GPU or N",
+        "timestamp": "2026-04-14T05:29:16.645Z"
+      },
+      {
+        "content": "PU architecture.\n\n### 6. Ethical and Transparent Operations\nAs per the governance of **ZombieCoder**, local-first AI promotes",
+        "timestamp": "2026-04-14T05:29:16.816Z"
+      },
+      {
+        "content": " transparency. You know exactly what code is running and how your data is being handled. It prevents the \"black box\" problem",
+        "timestamp": "2026-04-14T05:29:16.983Z"
+      },
+      {
+        "content": " where cloud providers might use your inputs to train future models without your explicit consent.\n\n**Summary:**\nLocal-first AI development empowers",
+        "timestamp": "2026-04-14T05:29:17.099Z"
+      },
+      {
+        "content": " developers with **sovereignty** over their tools. At **Developer Zone**, we believe this approach is the future of responsible and",
+        "timestamp": "2026-04-14T05:29:17.282Z"
+      },
+      {
+        "content": " efficient software engineering.\n\nIf you have questions about setting up local environments or specific models, feel free to ask!",
+        "timestamp": "2026-04-14T05:29:17.439Z"
+      }
+    ],
+    "traceId": "FORENSIC-1776144550586-ikj7v",
+    "duration": 2991
+  }
+]

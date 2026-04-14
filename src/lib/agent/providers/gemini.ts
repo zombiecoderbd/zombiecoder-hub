@@ -26,7 +26,7 @@ export interface GeminiResponse {
 
 export class GeminiProvider {
   private apiKey: string;
-  private model: string = 'gemini-1.5-flash';
+  private model: string = 'gemini-flash-latest';
   private baseUrl: string = 'https://generativelanguage.googleapis.com/v1beta';
   private timeout: number = 30000;
 
@@ -153,6 +153,97 @@ export class GeminiProvider {
       return response.ok;
     } catch {
       return false;
+    }
+  }
+
+  /**
+   * Stream message from Gemini
+   */
+  async *streamChat(
+    messages: Array<{ role: string; content: string }>,
+    options?: { model?: string }
+  ): AsyncGenerator<string> {
+    if (!this.isConfigured()) {
+      throw new Error('Gemini API key not configured');
+    }
+
+    try {
+      const geminiMessages = this.convertMessages(messages);
+      const model = options?.model || this.model;
+
+      const response = await fetch(
+        `${this.baseUrl}/models/${model}:streamGenerateContent?key=${this.apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: geminiMessages,
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 2048,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Gemini stream error: ${response.statusText}`);
+      }
+
+      if (!response.body) {
+        throw new Error('Gemini stream response body is null');
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        
+        /**
+         * Gemini stream (v1beta) returns a JSON array [{},{},...] over the life of the stream.
+         * We need to find objects {} inside the buffer.
+         */
+        let startIdx: number;
+        while ((startIdx = buffer.indexOf('{')) !== -1) {
+          let depth = 0;
+          let endIdx = -1;
+
+          for (let i = startIdx; i < buffer.length; i++) {
+            if (buffer[i] === '{') depth++;
+            else if (buffer[i] === '}') {
+              depth--;
+              if (depth === 0) {
+                endIdx = i;
+                break;
+              }
+            }
+          }
+
+          if (endIdx !== -1) {
+            const jsonStr = buffer.substring(startIdx, endIdx + 1);
+            buffer = buffer.substring(endIdx + 1);
+
+            try {
+              const data = JSON.parse(jsonStr) as GeminiResponse;
+              const chunk = data.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (chunk) yield chunk;
+            } catch (e) {
+              // Not a full object yet or parse error
+            }
+          } else {
+            // No full object in buffer yet
+            break;
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[v0] Gemini streaming error:', err);
+      throw err;
     }
   }
 

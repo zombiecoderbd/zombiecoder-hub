@@ -4,12 +4,12 @@
 BASE_URL="${BASE_URL:-http://localhost:3000}"
 EMAIL="${EMAIL:-}"
 PASSWORD="${PASSWORD:-}"
-TYPING_DELAY_MS="${TYPING_DELAY_MS:-12}"
+TYPING_DELAY_MS="${TYPING_DELAY_MS:-1}"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
   case $1 in
-    -b|--base-url)
+    -b|--base-url)5+1
       BASE_URL="$2"
       shift 2
       ;;

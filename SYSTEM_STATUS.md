@@ -253,11 +253,11 @@ NODE_ENV                 production/development/test
 ```
 AI_PROVIDER             ollama (default), openai, gemini
 OLLAMA_BASE_URL         http://localhost:11434
-OLLAMA_MODEL            mistral (default)
+OLLAMA_MODEL            smollm:latest (default)
 OPENAI_API_KEY          API key for OpenAI
 OPENAI_MODEL            gpt-4-turbo-preview (default)
 GEMINI_API_KEY          API key for Gemini
-GEMINI_MODEL            gemini-pro (default)
+GEMINI_MODEL            gemini-flash-latest (default)
 CORS_ORIGIN             http://localhost:3000 (default)
 LOG_LEVEL               debug/info/warn/error (info)
 ```

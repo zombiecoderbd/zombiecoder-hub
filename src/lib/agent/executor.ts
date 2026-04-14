@@ -17,6 +17,92 @@ export class AgentExecutor {
   private userId: string;
   private agentId: string = 'default-agent';
 
+  private async recordUsage(params: {
+    providerKey: 'ollama' | 'openai' | 'gemini';
+    modelName?: string;
+    latencyMs: number;
+    success: boolean;
+    errorMessage?: string;
+  }): Promise<void> {
+    const db = getDbClient();
+    const providerKey = params.providerKey;
+    const modelName = (params.modelName || '').trim();
+
+    const provider = await db.provider.findUnique({
+      where: { key: providerKey },
+      select: { id: true },
+    });
+
+    if (!provider) return;
+
+    await db.providerUsage.upsert({
+      where: { providerId: provider.id },
+      update: {
+        requestCount: { increment: 1 },
+        successCount: params.success ? { increment: 1 } : undefined,
+        errorCount: params.success ? undefined : { increment: 1 },
+        lastLatencyMs: params.latencyMs,
+        lastStatus: params.success ? 'ok' : 'error',
+        lastError: params.success ? null : params.errorMessage || 'unknown error',
+        lastRequestAt: new Date(),
+      },
+      create: {
+        providerId: provider.id,
+        requestCount: 1,
+        successCount: params.success ? 1 : 0,
+        errorCount: params.success ? 0 : 1,
+        avgLatencyMs: params.latencyMs,
+        lastLatencyMs: params.latencyMs,
+        lastStatus: params.success ? 'ok' : 'error',
+        lastError: params.success ? null : params.errorMessage || 'unknown error',
+        lastRequestAt: new Date(),
+      },
+    });
+
+    if (!modelName) return;
+
+    const model = await db.model.findFirst({
+      where: { providerId: provider.id, name: modelName },
+      select: { id: true },
+    });
+    if (!model) return;
+
+    const usage = await db.modelUsage.upsert({
+      where: { providerId_modelId: { providerId: provider.id, modelId: model.id } },
+      update: {
+        requestCount: { increment: 1 },
+        successCount: params.success ? { increment: 1 } : undefined,
+        errorCount: params.success ? undefined : { increment: 1 },
+        lastLatencyMs: params.latencyMs,
+        lastStatus: params.success ? 'ok' : 'error',
+        lastError: params.success ? null : params.errorMessage || 'unknown error',
+        lastRequestAt: new Date(),
+      },
+      create: {
+        providerId: provider.id,
+        modelId: model.id,
+        requestCount: 1,
+        successCount: params.success ? 1 : 0,
+        errorCount: params.success ? 0 : 1,
+        avgLatencyMs: params.latencyMs,
+        lastLatencyMs: params.latencyMs,
+        lastStatus: params.success ? 'ok' : 'error',
+        lastError: params.success ? null : params.errorMessage || 'unknown error',
+        lastRequestAt: new Date(),
+      },
+    });
+
+    try {
+      const avg = Math.round((usage.avgLatencyMs * (usage.requestCount - 1) + params.latencyMs) / usage.requestCount);
+      await db.modelUsage.update({
+        where: { id: usage.id },
+        data: { avgLatencyMs: avg },
+      });
+    } catch {
+      // ignore avg calc failure
+    }
+  }
+
   constructor(sessionId: string, userId: string) {
     this.sessionId = sessionId;
     this.userId = userId;
@@ -70,11 +156,41 @@ export class AgentExecutor {
       console.warn('[v0] Provider usage logging failed:', err);
     }
 
+    try {
+      if (response.provider === 'ollama' || response.provider === 'openai' || response.provider === 'gemini') {
+        const ok = !response.content.startsWith('Forced provider');
+        await this.recordUsage({
+          providerKey: response.provider,
+          modelName: response.model,
+          latencyMs: response.executionTime,
+          success: ok,
+          errorMessage: ok ? undefined : response.content,
+        });
+      }
+    } catch (err) {
+      console.warn('[v0] Usage stats record failed:', err);
+    }
+
     return {
       content: response.content,
       provider: response.provider,
       executionTime: response.executionTime,
     };
+  }
+
+  /**
+   * Stream agent execution
+   */
+  async *executeStream(
+    messages: OllamaMessage[],
+    overrides?: { provider?: 'ollama' | 'openai' | 'gemini'; model?: string }
+  ): AsyncGenerator<{ content: string; provider: string }> {
+    const manager = getProviderManager();
+    const stream = manager.streamMessage(messages, overrides);
+
+    for await (const chunk of stream) {
+      yield chunk;
+    }
   }
 
   /**

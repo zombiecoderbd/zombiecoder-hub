@@ -151,7 +151,7 @@ async function createDefaultAgents() {
         name: 'ZombieCoder Editor Agent',
         description: 'Primary development assistant for code editing and generation',
         modelProvider: 'ollama',
-        modelName: 'mistral',
+        modelName: 'deepseek-r1:1.5b',
         personaJson: JSON.stringify({
           name: 'ZombieCoder Dev Agent',
           tagline: 'যেখানে কোড ও কথা বলে',
@@ -164,7 +164,7 @@ async function createDefaultAgents() {
         name: 'ZombieCoder Documentation Agent',
         description: 'Documentation generation and knowledge management',
         modelProvider: 'ollama',
-        modelName: 'mistral',
+        modelName: 'deepseek-r1:1.5b',
         personaJson: JSON.stringify({
           name: 'Documentation Agent',
           traits: ['detailed', 'organized', 'technical'],
@@ -175,7 +175,7 @@ async function createDefaultAgents() {
         name: 'ZombieCoder Governance Agent',
         description: 'Ethics validation and risk assessment',
         modelProvider: 'ollama',
-        modelName: 'mistral',
+        modelName: 'deepseek-r1:1.5b',
         personaJson: JSON.stringify({
           name: 'Governance Agent',
           traits: ['strict', 'safety-focused', 'compliant'],

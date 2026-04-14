@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZombieCoder Hub - AI প্রোভাইডার সিস্টেম ব্যাখ্যা</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Bengali', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+        .flow-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .step {
+            background: #e3f2fd;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+        .step-number {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .code-box {
+            background: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin: 15px 0 15px 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        footer {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 ZombieCoder Hub v2.0</h1>
+            <p>AI প্রোভাইডার সিস্টেম - সম্পূর্ণ ব্যাখ্যা</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">"যেখানে কোড ও কথা বলে"</p>
+        </header>
+
+        <div class="content">
+            <!-- ভূমিকা -->
+            <div class="section">
+                <h2>📖 ভূমিকা - সহজ ভাষায় বুঝুন</h2>
+                <p>
+                    ZombieCoder Hub একটি শক্তিশালী AI সিস্টেম যা বিভিন্ন AI প্রোভাইডার (যেমন Ollama, Gemini, OpenAI) ব্যবহার করে 
+                    আপনার প্রশ্নের উত্তর দেয়। এই ডকুমেন্টে আমরা খুব সহজ ভাষায় বুঝবো কিভাবে আপনার ইনপুট AI প্রোভাইডারের কাছে যায় 
+                    এবং উত্তর ফিরে আসে।
+                </p>
+                
+                <div class="info">
+                    <strong>💡 মূল কথা:</strong> আপনি যখন চ্যাটবক্সে কিছু লেখেন, তখন সেটি কয়েকটি ধাপ পার হয়ে AI প্রোভাইডারের কাছে যায়, 
+                    প্রোভাইডার উত্তর তৈরি করে, এবং সেই উত্তর আবার আপনার কাছে ফিরে আসে।
+                </div>
+            </div>
+
+            <!-- সম্পূর্ণ প্রবাহ -->
+            <div class="section">
+                <h2>🔄 সম্পূর্ণ প্রবাহ - ইনপুট থেকে আউটপুট পর্যন্ত</h2>
+                
+                <h3>ধাপে ধাপে কি ঘটে:</h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>আপনার ইনপুট (User Input)</strong><br>
+                    আপনি চ্যাটবক্সে লিখলেন: <em>"Python এ factorial function লিখে দাও"</em>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>অথেন্টিকেশন চেক (Authentication)</strong><br>
+                    সিস্টেম চেক করে আপনি লগইন করেছেন কিনা। JWT টোকেন দিয়ে আপনার পরিচয় যাচাই হয়।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>সেশন তৈরি বা খুঁজে বের করা (Session Management)</strong><br>
+                    প্রতিটি চ্যাট সেশনের একটি уникаль ID থাকে। আপনার সব মেসেজ সেই সেশনে সেভ হয়।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>মেসেজ ডাটাবেজে সংরক্ষণ (Store Message)</strong><br>
+                    আপনার প্রশ্ন MySQL ডাটাবেজের <code>messages</code> টেবিলে সেভ হয়।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <strong>এজেন্ট এক্সিকিউটর (Agent Executor)</strong><br>
+                    এটি হলো মূল ব্রেইন! এটি ঠিক করে কোন AI প্রোভাইডারকে কল করতে হবে।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">6</span>
+                    <strong>প্রোভাইডার ম্যানেজার (Provider Manager)</strong><br>
+                    এটি অটোমেটিকভাবে প্রোভাইডার বেছে নেয়: <span class="highlight">Ollama → OpenAI → Gemini</span>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">7</span>
+                    <strong>AI প্রোভাইডারে কল (API Call)</strong><br>
+                    আপনার মেসেজ নির্বাচিত প্রোভাইডারের API তে পাঠানো হয়।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">8</span>
+                    <strong>উত্তর পাওয়া (Receive Response)</strong><br>
+                    AI প্রোভাইডার উত্তর তৈরি করে ফেরত পাঠায় (৩০-৪৫ সেকেন্ড সময় লাগতে পারে)।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">9</span>
+                    <strong>উত্তর সংরক্ষণ (Store Response)</strong><br>
+                    AI এর উত্তর আবার ডাটাবেজে সেভ হয় ভবিষ্যতের জন্য।
+                </div>
+
+                <div class="step">
+                    <span class="step-number">10</span>
+                    <strong>আপনার কাছে উত্তর (Display Response)</strong><br>
+                    উত্তর আপনার স্ক্রিনে দেখানো হয়!
+                </div>
+            </div>
+
+            <!-- প্রোভাইডার তুলনা -->
+            <div class="section">
+                <h2>🏢 AI প্রোভাইডারদের তুলনা</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ফিচার</th>
+                            <th>Ollama (লোকাল)</th>
+                            <th>Gemini (Google)</th>
+                            <th>OpenAI (GPT)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ধরন</strong></td>
+                            <td>আপনার কম্পিউটারে চলে</td>
+                            <td>Google এর ক্লাউডে</td>
+                            <td>OpenAI এর ক্লাউডে</td>
+                        </tr>
+                        <tr>
+                            <td><strong>সাধারণ উত্তর</strong></td>
+                            <td><code>/api/chat</code></td>
+                            <td><code>generateContent</code></td>
+                            <td><code>chat.completions.create</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>লাইভ উত্তর (Stream)</strong></td>
+                            <td><code>stream: true</code></td>
+                            <td><code>streamGenerateContent</code></td>
+                            <td><code>stream: true</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>টোকেন গণনা</strong></td>
+                            <td>অটোমেটিক (/api/show)</td>
+                            <td>অটোমেটিক (usageMetadata)</td>
+                            <td>Tiktoken লাইব্রেরি লাগে</td>
+                        </tr>
+                        <tr>
+                            <td><strong>এম্বেডিং (Data Search)</strong></td>
+                            <td><code>/api/embeddings</code></td>
+                            <td><code>embedContent</code></td>
+                            <td><code>embeddings.create</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>URL</strong></td>
+                            <td>http://localhost:11434</td>
+                            <td>generativelanguage.googleapis.com</td>
+                            <td>api.openai.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>খরচ</strong></td>
+                            <td>✅ সম্পূর্ণ ফ্রি</td>
+                            <td>✅ ফ্রি টিয়ার আছে</td>
+                            <td>❓ পেইড (API key লাগে)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>স্পিড</strong></td>
+                            <td>⚠️ ধীর (আপনার হার্ডওয়্যার উপর)</td>
+                            <td>✅ দ্রুত</td>
+                            <td>✅ দ্রুত</td>
+                        </tr>
+                        <tr>
+                            <td><strong>মডেল সংখ্যা</strong></td>
+                            <td>৮টি (আপনার কম্পিউটারে)</td>
+                            <td>৫০+ মডেল</td>
+                            <td>১০+ মডেল</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ফলব্যাক চেইন -->
+            <div class="section">
+                <h2>🎯 অটোমেটিক ফলব্যাক সিস্টেম</h2>
+                
+                <p>
+                    ZombieCoder Hub একটি স্মার্ট <strong>ফলব্যাক চেইন</strong> ব্যবহার করে। তার মানে হলো, 
+                    যদি প্রথম প্রোভাইডার কাজ না করে,自动ভাবে দ্বিতীয়টি চেষ্টা করে!
+                </p>
+
+                <div class="diagram">
+    ┌─────────────────────────────────────────────┐
+    │         আপনার মেসেজ আসছে...               │
+    └────────────────┬────────────────────────────┘
+                     │
+                     ▼
+    ┌─────────────────────────────────────────────┐
+    │   ধাপ ১: Ollama (লোকাল AI)                 │
+    │   http://localhost:11434/api/chat          │
+    │   ⚠️ যদি টাইমআউট হয় বা ফেইল করে...        │
+    └────────────────┬────────────────────────────┘
+                     │ ফেইল করলে
+                     ▼
+    ┌─────────────────────────────────────────────┐
+    │   ধাপ ২: OpenAI (ক্লাউড AI)                 │
+    │   api.openai.com/v1/chat/completions       │
+    │   ⚠️ যদি API key না থাকে বা ফেইল করে...   │
+    └────────────────┬────────────────────────────┘
+                     │ ফেইল করলে
+                     ▼
+    ┌─────────────────────────────────────────────┐
+    │   ধাপ ৩: Gemini (Google AI) ✅ বর্তমানে    │
+    │   generativelanguage.googleapis.com        │
+    │   ✅ কাজ করছে!                              │
+    └────────────────┬────────────────────────────┘
+                     │
+                     ▼
+    ┌─────────────────────────────────────────────┐
+    │   উত্তর আপনার কাছে পাঠানো হলো! 🎉          │
+    └─────────────────────────────────────────────┘
+                </div>
+
+                <div class="success">
+                    <strong>✅ বর্তমান অবস্থা:</strong> Ollama টাইমআউট হচ্ছে, তাই সিস্টем自动ভাবে Gemini ব্যবহার করছে এবং সফলভাবে উত্তর দিচ্ছে!
+                </div>
+            </div>
+
+            <!-- কোড ফাইল কোথায় -->
+            <div class="section">
+                <h2>📁 কোড ফাইলগুলো কোথায় আছে</h2>
+                
+                <h3>১. প্রোভাইডার ফাইল (যারা API কল করে):</h3>
+                <ul>
+                    <li><code>src/lib/agent/providers/ollama.ts</code> - Ollama কে কল করে</li>
+                    <li><code>src/lib/agent/providers/gemini.ts</code> - Gemini কে কল করে</li>
+                    <li><code>src/lib/agent/providers/openai.ts</code> - OpenAI কে কল করে</li>
+                </ul>
+
+                <h3>২. ম্যানেজার ফাইল (যারা সিদ্ধান্ত নেয়):</h3>
+                <ul>
+                    <li><code>src/lib/agent/provider-manager.ts</code> - কোন প্রোভাইডার ব্যবহার করবে তা ঠিক করে</li>
+                    <li><code>src/lib/agent/executor.ts</code> - সম্পূর্ণ প্রক্রিয়া পরিচালনা করে</li>
+                </ul>
+
+                <h3>৩. API রাউট (যারা আপনার রিকোয়েস্ট পায়):</h3>
+                <ul>
+                    <li><code>app/api/agent/chat/route.ts</code> - চ্যাট মেসেজ হ্যান্ডেল করে</li>
+                    <li><code>app/api/agent/session/route.ts</code> - সেশন তৈরি/মুছে ফেলে</li>
+                </ul>
+
+                <h3>৪. ডাটাবেজ (যেখানে সব সংরক্ষিত হয়):</h3>
+                <ul>
+                    <li><strong>MySQL ডাটাবেজ:</strong> <code>zombiecoder</code></li>
+                    <li><strong>টেবিল:</strong> messages, sessions, users, agents, tools ইত্যাদি</li>
+                </ul>
+            </div>
+
+            <!-- ডাটাবেজে কি সংরক্ষিত হয় -->
+            <div class="section">
+                <h2>💾 ডাটাবেজে কি কি সংরক্ষিত হয়</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>টেবিলের নাম</th>
+                            <th>কি সংরক্ষিত হয়</th>
+                            <th>কেন লাগে</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>users</code></td>
+                            <td>ইউজারের তথ্য (নাম, ইমেইল, পাসওয়ার্ড)</td>
+                            <td>লগইন করার জন্য</td>
+                        </tr>
+                        <tr>
+                            <td><code>sessions</code></td>
+                            <td>চ্যাট সেশনের তথ্য</td>
+                            <td>প্রতিটি চ্যাট আলাদা রাখতে</td>
+                        </tr>
+                        <tr>
+                            <td><code>messages</code></td>
+                            <td>আপনার প্রশ্ন + AI এর উত্তর</td>
+                            <td>চ্যাট হিস্ট্রি দেখতে</td>
+                        </tr>
+                        <tr>
+                            <td><code>agents</code></td>
+                            <td>AI এজেন্টের কনফিগারেশন</td>
+                            <td>এজেন্টের ব্যক্তিত্ব ঠিক রাখতে</td>
+                        </tr>
+                        <tr>
+                            <td><code>tools</code></td>
+                            <td>AI কি কি কাজ করতে পারে</td>
+                            <td>ফাইল পড়া/লেখা, কমান্ড চালানো</td>
+                        </tr>
+                        <tr>
+                            <td><code>audit_logs</code></td>
+                            <td>কোন AI কল কখন হয়েছে</td>
+                            <td>নিরাপত্তা এবং মনিটরিং</td>
+                        </tr>
+                        <tr>
+                            <td><code>system_config</code></td>
+                            <td>সিস্টেম সেটিংস (মডেল লিস্ট)</td>
+                            <td>কনফিগারেশন সংরক্ষণ</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info">
+                    <strong>📊 উদাহরণ:</strong> আপনি যখন "Hello" লেখেন, তখন <code>messages</code> টেবিলে ২টি এন্ট্রি তৈরি হয়:
+                    <ol>
+                        <li><code>role: "user"</code>, <code>content: "Hello"</code></li>
+                        <li><code>role: "assistant"</code>, <code>content: "Hi! How can I help you?"</code></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- কোড উদাহরণ -->
+            <div class="section">
+                <h2>💻 কোড উদাহরণ - কিভাবে API কল হয়</h2>
+                
+                <h3>Ollama কে কিভাবে কল করা হয়:</h3>
+                <div class="code-box">
+// Ollama প্রোভাইডার থেকে কোড (ollama.ts)
+async sendMessage(messages) {
+  // আপনার কম্পিউটারে Ollama সার্ভারে কল
+  const response = await fetch(
+    'http://localhost:11434/api/chat',  // ← Ollama URL
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'smollm:latest',  // ← কোন মডেল ব্যবহার হবে
+        messages: [
+          { role: 'user', content: 'আপনার প্রশ্ন' }
+        ],
+        stream: false
+      })
+    }
+  );
+  
+  return response.message.content;  // ← উত্তর ফেরত
+}
+                </div>
+
+                <h3>Gemini কে কিভাবে কল করা হয়:</h3>
+                <div class="code-box">
+// Gemini প্রোভাইডার থেকে কোড (gemini.ts)
+async sendMessage(messages) {
+  // Google এর সার্ভারে কল
+  const response = await fetch(
+    'https://generativelanguage.googleapis.com/v1beta/' +
+    'models/gemini-flash-latest:generateContent' +
+    '?key=AIzaSyB1hFbncerF7ZZ1sLz9NIOvFCnw6wmdMdM',  // ← API key
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: messages,
+        generationConfig: {
+          temperature: 0.7,      // ← ক্রিয়েটিভিটি লেভেল
+          maxOutputTokens: 2048  // ← সর্বোচ্চ উত্তর দৈর্ঘ্য
+        }
+      })
+    }
+  );
+  
+  return response.candidates[0].content.parts[0].text;  // ← উত্তর
+}
+                </div>
+
+                <h3>ফলব্যাক লজিক (provider-manager.ts):</h3>
+                <div class="code-box">
+// ProviderManager - অটোমেটিক ফলব্যাক সিস্টেম
+async sendMessage(messages) {
+  // ধাপ ১: Ollama চেষ্টা করো
+  try {
+    if (ollama available) {
+      return ollama.sendMessage(messages);  // ✅ সফল!
+    }
+  } catch {
+    // Ollama ফেইল করলে...
+  }
+  
+  // ধাপ ২: OpenAI চেষ্টা করো
+  try {
+    if (openai configured) {
+      return openai.sendMessage(messages);  // ✅ সফল!
+    }
+  } catch {
+    // OpenAI ফেইল করলে...
+  }
+  
+  // ধাপ ৩: Gemini চেষ্টা করো
+  try {
+    if (gemini configured) {
+      return gemini.sendMessage(messages);  // ✅ বর্তমানে এটি কাজ করছে!
+    }
+  } catch {
+    // Gemini ফেইল করলে...
+  }
+  
+  // সব ফেইল করলে
+  return "দুঃখিত, কোন AI পাওয়া যাচ্ছে না!";
+}
+                </div>
+            </div>
+
+            <!-- বর্তমান অবস্থা -->
+            <div class="section">
+                <h2>📊 বর্তমান সিস্টেম অবস্থা</h2>
+                
+                <div class="success">
+                    <h3>✅ যা কাজ করছে:</h3>
+                    <ul>
+                        <li><strong>Gemini AI:</strong> সম্পূর্ণ কাজ করছে (৫০+ মডেল)</li>
+                        <li><strong>ডাটাবেজ:</strong> MySQL সফলভাবে সংযুক্ত</li>
+                        <li><strong>অথেন্টিকেশন:</strong> JWT লগইন কাজ করছে</li>
+                        <li><strong>মেসেজ স্টোরেজ:</strong> প্রশ্ন-উত্তর সেভ হচ্ছে</li>
+                        <li><strong>ফলব্যাক সিস্টেম:</strong>自动ভাবে Gemini ব্যবহার হচ্ছে</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <h3>⚠️ যা উন্নত করা যায়:</h3>
+                    <ul>
+                        <li><strong>Ollama:</strong> টাইমআউট হচ্ছে (৩০ সেকেন্ডে) - টাইমআউট বাড়ানো যায়</li>
+                        <li><strong>OpenAI:</strong> API key কনফিগার করলে আরো ভালো হবে</li>
+                        <li><strong>রেসপন্স টাইম:</strong> ৩৫-৪৫ সেকেন্ড লাগছে - caching যোগ করা যায়</li>
+                    </ul>
+                </div>
+
+                <h3>প্রোভাইডার পরিসংখ্যান:</h3>
+                <table>
+                    <tr>
+                        <th>প্রোভাইডার</th>
+                        <th>অবস্থা</th>
+                        <th>মডেল সংখ্যা</th>
+                        <th>রেসপন্স টাইম</th>
+                    </tr>
+                    <tr>
+                        <td>Ollama (লোকাল)</td>
+                        <td>⚠️ টাইমআউট</td>
+                        <td>৮টি</td>
+                        <td>৩০+ সেকেন্ড</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini (Google)</td>
+                        <td>✅ সক্রিয়</td>
+                        <td>৫০+ মডেল</td>
+                        <td>৩৫-৪৫ সেকেন্ড</td>
+                    </tr>
+                    <tr>
+                        <td>OpenAI</td>
+                        <td>❌ কনফিগার নয়</td>
+                        <td>১০+ মডেল</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- সারসংক্ষেপ -->
+            <div class="section">
+                <h2>🎯 সারসংক্ষেপ</h2>
+                
+                <div class="flow-box">
+                    <h3>সহজ ভাষায় পুরো প্রক্রিয়া:</h3>
+                    <ol>
+                        <li><strong>আপনি লিখলেন:</strong> চ্যাটবক্সে আপনার প্রশ্ন</li>
+                        <li><strong>সিস্টেম চেক করল:</strong> আপনি লগইন করেছেন কিনা</li>
+                        <li><strong>সেশন খুলল:</strong> আপনার চ্যাটের জন্য একটি unique ID</li>
+                        <li><strong>প্রশ্ন সেভ করল:</strong> MySQL ডাটাবেজে</li>
+                        <li><strong>AI বেছে নিল:</strong> Ollama চেষ্টা → ফেইল → Gemini সিলেক্ট</li>
+                        <li><strong>API কল করল:</strong> Google এর সার্ভারে আপনার প্রশ্ন পাঠাল</li>
+                        <li><strong>উত্তর পেল:</strong> ৩৫-৪৫ সেকেন্ড পর Gemini উত্তর দিল</li>
+                        <li><strong>উত্তর সেভ করল:</strong> আবার ডাটাবেজে</li>
+                        <li><strong>দেখাল:</strong> আপনার স্ক্রিনে উত্তর!</li>
+                    </ol>
+                </div>
+
+                <div class="info">
+                    <strong>🔑 মূল বিষয়:</strong> ZombieCoder Hub একটি স্মার্ট সিস্টেম যা automatically সবচেয়ে ভালো AI প্রোভাইডার বেছে নেয়। 
+                    যদি একটি ফেইল করে,自动ভাবে অন্যটি ব্যবহার করে। বর্তমানে Gemini দিয়ে সব কাজ চলছে এবং এটি সফলভাবে উত্তর দিচ্ছে!
+                </div>
+            </div>
+
+            <!-- পরবর্তী পদক্ষেপ -->
+            <div class="section">
+                <h2>🚀 পরবর্তী পদক্ষেপ (Recommendations)</h2>
+                
+                <h3>১. Ollama ঠিক করা:</h3>
+                <ul>
+                    <li>টাইমআউট ৩০ সেকেন্ড থেকে ৬০ সেকেন্ডে বাড়ান</li>
+                    <li>ছোট মডেল ব্যবহার করুন (যেমন: smollm:latest)</li>
+                    <li>RAM এবং CPU চেক করুন</li>
+                </ul>
+
+                <h3>২. OpenAI যোগ করা:</h3>
+                <ul>
+                    <li>OpenAI API key নিন (platform.openai.com)</li>
+                    <li><code>.env.local</code> এ <code>OPENAI_API_KEY=sk-...</code> যোগ করুন</li>
+                    <li>আরো দ্রুত উত্তর পাবেন!</li>
+                </ul>
+
+                <h3>৩. পারফরম্যান্স উন্নত করা:</h3>
+                <ul>
+                    <li>Streaming response যোগ করুন (উত্তর ধীরে ধীরে দেখাবে)</li>
+                    <li>Caching সিস্টেম যোগ করুন (একই প্রশ্নের দ্রুত উত্তর)</li>
+                    <li>Session management উন্নত করুন</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>ZombieCoder Hub v2.0</strong></p>
+            <p>"যেখানে কোড ও কথা বলে"</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                📧 info@zombiecoder.my.id | 🌐 https://zombiecoder.my.id/ | 📱 +880 1323-626282
+            </p>
+            <p style="margin-top: 10px; font-size: 0.8em; opacity: 0.7;">
+                ডকুমেন্ট তৈরি: এপ্রিল ১১, ২০২৬
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
